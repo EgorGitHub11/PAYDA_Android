@@ -1,56 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image} from 'react-native';
-import {w,h,stylesText} from '../../constants'
+import { 
+  View, Text, 
+  StyleSheet,Image,
+  TouchableOpacity,
+} from 'react-native';
+import LoginLogic from './LoginLogic'
+import {h,w} from '../../constants'
 
-export default class LoginUI extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render(){
-      const {containerMain,containerLogo,containerLogin} = styles
+const LoginLetter = (props) => {
+    const {container,formContainer,headerLogin} = styles
     return (
-      <View style={containerMain}>
-
-        <View style={containerLogo}>
-            <Image/>
-        </View>
-
-        <View style={containerLogin}>
-            <Text style={stylesText.h1_L}>
-                <Text style={{color:'red'}}>ПАЙДА</Text>
-                <Text style={{color:'grey'}}>БУХГАЛТЕРИЯ</Text>
-            </Text>
-            <Text>Input</Text>
-            <Text>Input</Text>
-        </View>
+        <View style={container}>
+          <View style={headerLogin}>
         
-      </View>
+          </View>
+          <View style={formContainer}>
+            <LoginLogic/>
+          </View>
+        </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
-    containerMain:{
+    container:{
         flex:1,
-        backgroundColor: 'skyblue',
-        width: w,
-        height: h
+        backgroundColor: '#fff',
     },
-    containerLogo:{
-        flex:2,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'green',
-        width: w,
+    formContainer:{
+      flex: 4,
+      justifyContent: 'center',
     },
-    containerLogin:{
-        flex:3,
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor:'#fff'
+    headerLogin:{
+      width: w,
+      flex:2,
+      backgroundColor: 'green'
     }
 });
+
+export default LoginLetter
