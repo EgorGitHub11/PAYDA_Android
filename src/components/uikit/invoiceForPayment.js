@@ -21,11 +21,10 @@ export default class invoiceForPayment extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    width:w / 2.2,
-    height: h / 3.5,
+    width:w / 2.1,
+    height: h / 3.6,
     margin:2,
     padding: 10,
-    borderRadius: 10,
     backgroundColor: '#fff',
     flexDirection:'column',
     justifyContent: 'center',
