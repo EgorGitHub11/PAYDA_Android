@@ -7,6 +7,8 @@ import {
 
 import Toast from 'react-native-tiny-toast'
 import {h,w} from '../../constants'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 export default class LoginLogic extends Component {
   constructor(props){
@@ -21,7 +23,10 @@ export default class LoginLogic extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={container}>
         <View style={containerTitle}>
-          <Text style={title}>ПАЙДАБУХГАЛТЕРИЯ</Text>
+          <Text style={title}>
+            <Text style={{color:'red'}}>ПАЙДА</Text>
+            <Text style={{color:'grey'}}>БУХГАЛТЕРИЯ</Text>
+          </Text>
         </View>
         <ScrollView>
           <TextInput 
@@ -51,7 +56,9 @@ const styles = StyleSheet.create({
     },
     input:{
       height: 40,
-      margin: 20,
+      marginVertical: 20,
+      textAlign: 'center',
+      fontSize: 20,
       direction: 'rtl',
       backgroundColor: '#fff',
       borderBottomWidth: 1,
@@ -61,19 +68,15 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
       marginTop: 10,
-      backgroundColor: '#528156',
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      borderColor: 'grey',
       paddingVertical: 15,
-      shadowColor: '#000',
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 5 },
-      shadowOpacity: 0.4,
-      elevation: 3,
-      marginBottom: 10
     },
     buttonText:{
       textAlign: 'center',
-      color: '#fff',
-      fontWeight: '700'
+      color: 'grey',
+      fontSize: 20,
     },
     containerTitle:{
       justifyContent: 'center',
@@ -81,6 +84,6 @@ const styles = StyleSheet.create({
     },
     title:{
       fontSize:35,
-      paddingBottom: h / 20
+      paddingBottom: h / 15
     }
 });
