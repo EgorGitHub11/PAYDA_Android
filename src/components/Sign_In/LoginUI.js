@@ -8,18 +8,18 @@ import LoginLogic from './LoginLogic'
 import {h,w} from '../../constants'
 
 const LoginLetter = (props) => {
-    const {container,formContainer,headerLogin, containerTitle, title} = styles
+    const {container,formContainer,headerLogin, containerTitle, logo} = styles
     return (
         <View style={container}>
           <View style={headerLogin}>
             <View style={containerTitle}>
-              
+              <Image style={logo} source={require('../../Logo/logo.png')}/>
             </View>
 
           </View>
 
           <View style={formContainer}>
-            <LoginLogic/>
+            <LoginLogic navigation={props.navigation}/>
           </View>
 
         </View>
@@ -50,7 +50,13 @@ const styles = StyleSheet.create({
     title:{
       fontSize:35,
       paddingBottom: h / 20
-    }
+    },
+    logo:{
+      width: w,
+      height: h / 7,
+      resizeMode: 'contain',
+      margin: 'auto',
+  },
 });
 
 export default LoginLetter

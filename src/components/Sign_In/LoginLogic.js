@@ -7,16 +7,25 @@ import {
 
 import Toast from 'react-native-tiny-toast'
 import {h,w} from '../../constants'
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 
 export default class LoginLogic extends Component {
   constructor(props){
     super(props)
     this.state={
-
+        username: "",
+        password: ""
     }
   }
+
+  // componentDidMount(){
+  //   this._loadInitialState().done()
+  // }
+
+  // _loadInitialState = async() => {
+  //     var value = await AsyncStorage.getItem('user')
+
+  // }
+
  
   render() {
     const {input, containerTitle, container, buttonContainer, buttonText, title} = styles
@@ -37,7 +46,7 @@ export default class LoginLogic extends Component {
           placeholder='Введите пароль'
           style={input}/>
 
-          <TouchableOpacity onPress={() => {Toast.showSuccess('Cool!')}}
+          <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }
           style={buttonContainer}>
             <Text style={buttonText}>
                 ВОЙТИ
