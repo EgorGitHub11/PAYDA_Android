@@ -22,19 +22,19 @@ export default class HomeScreen extends Component {
         <StatusBar backgroundColor="grey"/>
         <Header/>
         <View style={childMainContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoice') }> 
               <Invoice/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('certificateOfCompletion') }>
               <CofC/>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
               <DeliveryNote/>
             </TouchableOpacity>
         </View>
