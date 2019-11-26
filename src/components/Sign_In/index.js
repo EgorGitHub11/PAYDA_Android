@@ -4,8 +4,9 @@ import { View, Text } from 'react-native';
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 
-import SignIn from '../Sign_In/index'
-import SplashScreen from './SplashScreen'
+
+import HomeScreen from '../HomeScreen/index'
+import SignIn from './LoginUI'
 
 export default class index extends Component {
   render() {
@@ -15,15 +16,15 @@ export default class index extends Component {
   }
 }
 
-const SplashNvigation = createStackNavigator(
+const SignInNavigation = createStackNavigator(
     {
-        SignIn:{screen:SignIn},
-        SplashScreen:{screen:SplashScreen}
+        Home:{screen:HomeScreen},
+        SignIn: {screen:SignIn}
     },
     {
         headerMode: 'none',
-        initialRouteName:'SplashScreen'
+        initialRouteName: 'SignIn'
     }
 )
 
-const AppContainer = createAppContainer(SplashNvigation)
+const AppContainer = createAppContainer(SignInNavigation)
