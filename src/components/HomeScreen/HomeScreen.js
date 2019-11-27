@@ -7,6 +7,7 @@ import CofC from '../uikit/certificateOfCompletion'
 import DeliveryNote from '../uikit/deliveryNote'
 import Invoice from '../uikit/invoice'
 import IForPay from '../uikit/invoiceForPayment'
+import Footer from '../uikit/footer'
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const {mainContainer, childMainContainer,container, containerG} = styles
+    const {mainContainer, childMainContainer,bottomContainer} = styles
     return (
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
@@ -39,9 +40,8 @@ export default class HomeScreen extends Component {
             </TouchableOpacity>
         </View>
 
-        <View style={[containerG, {marginBottom: 5,}]}></View>
-        <View style={containerG}></View>
-        <View style={container}></View>
+       <Footer/>
+
       </View>
     );
   }
@@ -61,20 +61,4 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     flexWrap:'wrap'
   },
-  bottomContainer:{
-    backgroundColor: '#fff',
-    flexDirection: "row",
-    justifyContent: 'space-around',
-    alignItems: 'center',
-},
-container:{
-  backgroundColor: '#F03C49',
-  width:w,
-  height: h / 12
-},
-containerG:{
-  backgroundColor: 'grey',
-  width:w,
-  height: h / 12,
-},
 });
