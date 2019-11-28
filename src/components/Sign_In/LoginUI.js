@@ -13,7 +13,7 @@ const LoginLetter = (props) => {
         <View style={container}>
           <View style={headerLogin}>
             <View style={containerTitle}>
-              <Image style={logo} source={require('../../Logo/logo.png')}/>
+              <Image style={logo} source={require('../../logo/logo.png')}/>
             </View>
 
           </View>

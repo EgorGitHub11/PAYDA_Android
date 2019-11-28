@@ -9,6 +9,7 @@ import invoice from '../../screens/screen2/invoice'
 import certificateOfCompletion from '../../screens/screen3/certificateOfCompletion'
 import deliveryNote from '../../screens/screen4/deliveryNote'
 import HomeScreen from './HomeScreen';
+import Inbox from '../Inbox/Inbox'
 
 export default class index extends Component {
   render() {
@@ -24,7 +25,8 @@ const AppNavigator = createStackNavigator(
       invoiceForPayment:{screen:invoiceForPayment},
       invoice:{screen:invoice},
       certificateOfCompletion:{screen:certificateOfCompletion},
-      deliveryNote:{screen:deliveryNote}
+      deliveryNote:{screen:deliveryNote},
+      Inbox:{screen:Inbox}
     },
     {
       headerMode:'none',

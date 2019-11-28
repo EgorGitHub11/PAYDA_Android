@@ -23,7 +23,7 @@ export default class SplashScreen extends Component {
     return (
       <View style={mainC}>
         <View>
-            <Image style={logo} source={require('../../Logo/logo.png')}/>
+            <Image style={logo} source={require('../../logo/logo.png')}/>
         </View>
       </View>
     );
