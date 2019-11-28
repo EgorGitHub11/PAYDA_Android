@@ -8,6 +8,7 @@ import {
 import Toast from 'react-native-tiny-toast'
 import {h,w} from '../../constants'
 
+
 export default class LoginLogic extends Component {
   constructor(props){
     super(props)
@@ -16,7 +17,6 @@ export default class LoginLogic extends Component {
         password: ""
     }
   }
-
   // componentDidMount(){
   //   this._loadInitialState().done()
   // }
@@ -25,8 +25,6 @@ export default class LoginLogic extends Component {
   //     var value = await AsyncStorage.getItem('user')
 
   // }
-
- 
   render() {
     const {input, containerTitle, container, buttonContainer, buttonText, title} = styles
     return (

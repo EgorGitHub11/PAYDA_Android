@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity,} from 'react-native';
-import Header from '../Header/Header'
+import Header from '../uikit/Header'
 import {h,w} from '../../constants'
 
 import CofC from '../uikit/certificateOfCompletion'

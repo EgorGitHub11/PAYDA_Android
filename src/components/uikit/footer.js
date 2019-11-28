@@ -40,7 +40,7 @@ export default class Footer extends Component {
 const styles = StyleSheet.create({
     bottomContainer:{
         backgroundColor: '#F03C49',
-        paddingVertical:5,
+        padding:10,
         flexDirection: "row",
         justifyContent: 'space-around',
         alignItems: 'center',
