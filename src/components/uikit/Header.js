@@ -18,7 +18,7 @@ export default class Header extends Component {
       const {headerTitle,container} = styles
     return (
         <View style={container}>
-            <Text style={headerTitle}>БУХГАЛТЕРИЯ</Text>
+            <Text style={headerTitle}>{this.props.name}</Text>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('Profile')}>
                 {myIcon}
             </TouchableOpacity>

@@ -21,7 +21,7 @@ export default class HomeScreen extends Component {
     return (
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
-        <Header navigation={this.props.navigation}/>
+        <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'}/>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay/>

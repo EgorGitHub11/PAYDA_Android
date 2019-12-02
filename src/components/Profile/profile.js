@@ -21,7 +21,7 @@ export default class Profile extends Component {
     const {childMainContainer, mainContainer} = styles
     return (
       <View style={mainContainer}>
-         <Header navigation={this.props.navigation}/>
+         <Header navigation={this.props.navigation} name={'МОЙ ПРОФИЛЬ'}/>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('')}>
               <Finansu navigation={this.props.navigation}/>

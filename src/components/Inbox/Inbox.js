@@ -22,7 +22,7 @@ export default class Inbox extends Component {
     const {childMainContainer, mainContainer} = styles
     return (
       <View style={mainContainer}>
-         <Header navigation={this.props.navigation}/>
+         <Header navigation={this.props.navigation} name={'АРХИВ'}/>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('')}>
               <Dogovor navigation={this.props.navigation}/>
