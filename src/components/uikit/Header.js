@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button} from 'react-native';
+import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
 import {h,w} from '../../constants'
+
+import Inbox from '../Inbox/Inbox'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const myIcon = <Icon name="account-circle" size={45} color="#fff" />;
@@ -17,7 +19,9 @@ export default class Header extends Component {
     return (
         <View style={container}>
             <Text style={headerTitle}>БУХГАЛТЕРИЯ</Text>
-            {myIcon}
+            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Profile')}>
+                {myIcon}
+            </TouchableOpacity>
         </View>
     );
   }

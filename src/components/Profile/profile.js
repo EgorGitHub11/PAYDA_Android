@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-import Act from './ui/act'
-import Declar from './ui/declar'
-import Dogovor from './ui/dogovor'
-import Plateg from './ui/plateg'
-import Prochee from './ui/prochee'
+import Finansu from './ui/finansu'
+import Calendar from './ui/calendar'
+import Agent from './ui/agent'
+import Message from './ui/message'
 
 import Header from '../uikit/Header'
 
 import {w,h} from '../../constants'
 
-export default class Inbox extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,23 +24,19 @@ export default class Inbox extends Component {
          <Header navigation={this.props.navigation}/>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('')}>
-              <Dogovor navigation={this.props.navigation}/>
+              <Finansu navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoice') }> 
-              <Plateg navigation={this.props.navigation}/>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }> 
+              <Calendar navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('certificateOfCompletion') }>
-              <Act navigation={this.props.navigation}/>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }>
+              <Agent navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
-              <Declar navigation={this.props.navigation}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
-              <Prochee navigation={this.props.navigation}/>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }>
+              <Message navigation={this.props.navigation}/>
             </TouchableOpacity>
         </View>
       </View>
