@@ -10,20 +10,20 @@ import {h,w} from '../../constants'
 const LoginLetter = (props) => {
     const {container,formContainer,headerLogin, containerTitle, logo} = styles
     return (
-        <View style={container}>
-          <View style={headerLogin}>
-            <View style={containerTitle}>
-              <Image style={logo} source={require('../../logo/logo.png')}/>
-            </View>
-
-          </View>
-
-          <View style={formContainer}>
-            <LoginLogic navigation={props.navigation}/>
+      <View style={container}>
+        <View style={headerLogin}>
+          <View style={containerTitle}>
+            <Image style={logo} source={require('../../logo/logo.png')}/>
           </View>
 
         </View>
-    );
+
+        <View style={formContainer}>
+          <LoginLogic navigation={props.navigation}/>
+        </View>
+
+      </View>
+  );
 }
 
 const styles = StyleSheet.create({

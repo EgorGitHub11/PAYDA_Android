@@ -17,14 +17,7 @@ export default class LoginLogic extends Component {
         password: ""
     }
   }
-  // componentDidMount(){
-  //   this._loadInitialState().done()
-  // }
-
-  // _loadInitialState = async() => {
-  //     var value = await AsyncStorage.getItem('user')
-
-  // }
+ 
   render() {
     const {input, containerTitle, container, buttonContainer, buttonText, title} = styles
     return (
@@ -44,7 +37,7 @@ export default class LoginLogic extends Component {
           placeholder='Введите пароль'
           style={input}/>
 
-          <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }
+          <TouchableOpacity onPress={ () => console.log(this.props.navigation.navigate('Home')) }
           style={buttonContainer}>
             <Text style={buttonText}>
                 ВОЙТИ
