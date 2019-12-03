@@ -7,23 +7,33 @@ import {
 import LoginLogic from './LoginLogic'
 import {h,w} from '../../constants'
 
-const LoginLetter = (props) => {
+export class LoginLetter extends React.Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       
+    };
+  };
+  
+  render(){
     const {container,formContainer,headerLogin, containerTitle, logo} = styles
     return (
       <View style={container}>
+
         <View style={headerLogin}>
           <View style={containerTitle}>
             <Image style={logo} source={require('../../logo/logo.png')}/>
           </View>
-
         </View>
 
         <View style={formContainer}>
-          <LoginLogic navigation={props.navigation}/>
+          <LoginLogic newJWT={this.props.newJWT}/>
         </View>
 
       </View>
   );
+  }
 }
 
 const styles = StyleSheet.create({

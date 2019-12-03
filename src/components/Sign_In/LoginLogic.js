@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { 
     Text, StyleSheet, TextInput, 
     TouchableOpacity, ScrollView, 
-    KeyboardAvoidingView, View
+    KeyboardAvoidingView, View,
 } from 'react-native';
+import { Input, TextLink, Loading, Button } from './ui';
+
+import axios from 'axios'
+import deviceStorage from '../../service'
 
 import Toast from 'react-native-tiny-toast'
 import {h,w} from '../../constants'
@@ -11,79 +15,126 @@ import {h,w} from '../../constants'
 
 export default class LoginLogic extends Component {
   constructor(props){
-    super(props)
-    this.state={
-        username: "",
-        password: ""
-    }
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      error: '',
+      loading: false
+    };
+
+    this.loginUser = this.loginUser.bind(this);
+    this.onLoginFail = this.onLoginFail.bind(this);
   }
+
+  loginUser() {
+    const { username, password, password_confirmation } = this.state;
+
+    this.setState({ error: '', loading: true });
+
+    // NOTE Post to HTTPS only in production
+    axios.post("http://192.168.31.237:8000/api/loginClient/",{
+        username: username,
+        password: password
+    })
+    .then((response) => {
+      console.log(response.data)
+      deviceStorage.saveItem("id_token", response.data.access_token);
+      this.props.newJWT(response.data.access_token);
+    })
+    .catch((error) => {
+      console.log(error);
+      this.onLoginFail();
+    });
+  }
+
+  onLoginFail() {
+    this.setState({
+      error: 'Login Failed',
+      loading: false
+    });
+  }
+
+
  
   render() {
-    const {input, containerTitle, container, buttonContainer, buttonText, title} = styles
+    const {username,password, error, loading} = this.state
+    const { form, section, errorTextStyle, containerTitle, title } = styles;
+
     return (
-      <KeyboardAvoidingView behavior="padding" style={container}>
+      <Fragment>
         <View style={containerTitle}>
           <Text style={title}>
             <Text style={{color:'red'}}>ПАЙДА</Text>
             <Text style={{color:'grey'}}>БУХГАЛТЕРИЯ</Text>
           </Text>
         </View>
-        <ScrollView>
-          <TextInput 
-          placeholder='Введите номер'
-          style={input}/> 
+        <View style={form}>
+          <View style={section}>
+            <Input
+              placeholder='Введите номер'
+              value={username}
+              onChangeText={username => this.setState({ username })}
+            />
+          </View>
 
-          <TextInput 
-          placeholder='Введите пароль'
-          style={input}/>
+          <View style={section}>
+            <Input
+              secureTextEntry
+              placeholder='Введите пароль'
+              value={password}
+              onChangeText={password => this.setState({ password })}
+            />
+          </View>
 
-          <TouchableOpacity onPress={ () => console.log(this.props.navigation.navigate('Home')) }
-          style={buttonContainer}>
-            <Text style={buttonText}>
-                ВОЙТИ
-            </Text>
-          </TouchableOpacity>
+          <Text style={errorTextStyle}>
+            {error}
+          </Text>
 
-        </ScrollView>
-      </KeyboardAvoidingView>
+          {!loading ?
+            <Button onPress={this.loginUser}>
+              ВОЙТИ
+            </Button>
+            :
+            <Loading size={'large'} />
+          }
+
+        </View>
+      </Fragment>
     );
   }
 }
 
-const styles = StyleSheet.create({
-    container:{
-      padding: 20,
-    },
-    input:{
-      height: 40,
-      marginVertical: 20,
-      textAlign: 'center',
-      fontSize: 20,
-      direction: 'rtl',
-      backgroundColor: '#fff',
-      borderBottomWidth: 1,
-      borderBottomColor: 'grey',
-      color: '#000',
-      paddingHorizontal: 10,
-    },
-    buttonContainer:{
-      marginTop: 10,
-      backgroundColor: '#fff',
-      borderWidth: 1,
-      borderColor: 'grey',
-      paddingVertical: 15,
-    },
-    buttonText:{
-      textAlign: 'center',
-      color: 'grey',
-      fontSize: 20,
-    },
-    containerTitle:{
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    title:{
-      fontSize:35,
-      paddingBottom: h / 15
-    }
-});
+const styles = {
+  form: {
+    width: w,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  section: {
+    width:w,
+    height: 40,
+    marginVertical: 20,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'green',
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
+    color: '#000',
+    paddingHorizontal: 10,
+  },
+  containerTitle:{
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title:{
+    fontSize:35,
+    paddingBottom: h / 15
+  },
+  errorTextStyle: {
+    alignSelf: 'center',
+    fontSize: 18,
+    color: 'red'
+  }
+};
