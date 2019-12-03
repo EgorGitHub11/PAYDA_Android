@@ -32,15 +32,16 @@ export default class LoginLogic extends Component {
 
     this.setState({ error: '', loading: true });
 
-    // NOTE Post to HTTPS only in production
     axios.post("http://192.168.31.237:8000/api/loginClient/",{
         username: username,
         password: password
     })
     .then((response) => {
       console.log(response.data)
+      this.props.navigation.navigate('Home')
       deviceStorage.saveItem("id_token", response.data.access_token);
-      this.props.newJWT(response.data.access_token);
+      console.log(response.data.access_token)
+      console.log(response.data.username)
     })
     .catch((error) => {
       console.log(error);
@@ -48,6 +49,7 @@ export default class LoginLogic extends Component {
     });
   }
 
+ 
   onLoginFail() {
     this.setState({
       error: 'Login Failed',

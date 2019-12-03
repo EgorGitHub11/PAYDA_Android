@@ -3,25 +3,65 @@ import { View, Text, StyleSheet, StatusBar, TouchableOpacity,} from 'react-nativ
 import Header from '../uikit/Header'
 import {h,w} from '../../constants'
 
+import axios from 'axios'
+import deviceStorage from '../../service'
+import {Button} from '../Sign_In/ui/Button'
+
 import CofC from '../uikit/certificateOfCompletion'
 import DeliveryNote from '../uikit/deliveryNote'
 import Invoice from '../uikit/invoice'
 import IForPay from '../uikit/invoiceForPayment'
 import Footer from '../uikit/footer'
 
+
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    };
+      username: '',
+      error: ''
+    }
   }
 
+  componentDidMount(){
+    const headers = {
+      'Authorization': 'Token ' + this.props.jwt
+    };
+    axios({
+      method: 'GET',
+      url: "http://192.168.31.237:8000/api/loginClient/",
+      headers: headers,
+    }).then((response) => {
+      console.log(response)
+      this.setState({
+        username: response.data.username,
+      });
+      console.log(this.state.username)
+    }).catch((error) => {
+      this.setState({
+        error: 'Error retrieving data',
+      });
+    });
+  }
+
+
   render() {
-    const {mainContainer, childMainContainer,bottomContainer} = styles
+    const { username, error} = this.state
+    const {mainContainer, childMainContainer,bottomContainer, errorText, emailText} = styles
     return (
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
-        <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'}/>
+        <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'} />
+        <View>
+              {username ?
+                <Text style={emailText}>
+                  Your username: {username}
+                </Text>
+                :
+                <Text style={errorText}>
+                  {error}
+                </Text>}
+            </View>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay/>
@@ -61,4 +101,14 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     flexWrap:'wrap'
   },
+  emailText: {
+    alignSelf: 'center',
+    color: 'black',
+    fontSize: 20
+  },
+  errorText: {
+    alignSelf: 'center',
+    fontSize: 18,
+    color: 'red'
+  }
 });

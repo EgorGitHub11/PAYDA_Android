@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import React from 'react'
 
 const deviceStorage = {
     async saveItem(key, value) {
@@ -9,7 +10,7 @@ const deviceStorage = {
         }
       },
 
-      async loadJWT() {
+      async newJWT() {
         try {
           const value = await AsyncStorage.getItem('id_token');
           if (value !== null) {

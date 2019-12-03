@@ -28,7 +28,7 @@ export class LoginLetter extends React.Component {
         </View>
 
         <View style={formContainer}>
-          <LoginLogic newJWT={this.props.newJWT}/>
+          <LoginLogic navigation={this.props.navigation}/>
         </View>
 
       </View>
