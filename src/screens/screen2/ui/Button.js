@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import {w,h} from '../../../constants'
 
-
 const Button = ({ onPress, children }) => {
   const { button, buttonText } = styles;
   return (
@@ -24,6 +23,7 @@ const styles = {
     borderWidth: 1,
     borderColor: 'grey',
     paddingVertical: 15,
+    marginBottom: 10,
   },
   buttonText:{
     textAlign: 'center',

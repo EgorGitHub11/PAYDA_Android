@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity,} from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, AsyncStorage} from 'react-native';
 import Header from '../uikit/Header'
 import {h,w} from '../../constants'
 
 import axios from 'axios'
-import deviceStorage from '../../service'
 import {Button} from '../Sign_In/ui/Button'
 
 import CofC from '../uikit/certificateOfCompletion'
@@ -14,35 +13,46 @@ import IForPay from '../uikit/invoiceForPayment'
 import Footer from '../uikit/footer'
 
 
+
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      error: ''
+      error: '',
+      jwt: ''
     }
   }
 
-  componentDidMount(){
-    const headers = {
-      'Authorization': 'Token ' + this.props.jwt
-    };
-    axios({
-      method: 'GET',
-      url: "http://192.168.31.237:8000/api/loginClient/",
-      headers: headers,
-    }).then((response) => {
-      console.log(response)
-      this.setState({
-        username: response.data.username,
-      });
-      console.log(this.state.username)
-    }).catch((error) => {
-      this.setState({
-        error: 'Error retrieving data',
-      });
-    });
-  }
+  
+
+
+  // componentDidMount(){
+  //   console.log(this.props.jwt)
+  //   const headers = {
+  //     'Authorization': 'Token ' + this.props.jwt
+  //   };
+  //   axios({
+  //     method: 'GET',
+  //     url: "http://192.168.31.237:8000/api/loginClient/",
+  //     headers: headers,
+  //   }).then((response) => {
+  //     console.log(response.data.access_token)
+  //     console.log(response.data.username)
+  //     this.setState({
+  //       username: response.data.username,
+  //     });
+  //     console.log(this.state.username + 'test')
+  //   }).catch((error) => {
+  //     this.setState({
+  //       error: 'Error retrieving data',
+  //     });
+  //   });
+  // }
+
+
+  
+
 
 
   render() {
@@ -52,16 +62,16 @@ export default class HomeScreen extends Component {
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
         <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'} />
-        {/* <View>
-              {username ?
+        <View>
+              {/* {username ?
                 <Text style={emailText}>
                   Your username: {username}
                 </Text>
                 :
                 <Text style={errorText}>
                   {error}
-                </Text>}
-            </View> */}
+                </Text>} */}
+            </View>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay/>
@@ -78,6 +88,7 @@ export default class HomeScreen extends Component {
             <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
               <DeliveryNote/>
             </TouchableOpacity>
+
         </View>
 
        <Footer navigation={this.props.navigation}/>

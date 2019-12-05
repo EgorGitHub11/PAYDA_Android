@@ -2,14 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { 
     Text, StyleSheet, TextInput, 
     TouchableOpacity, ScrollView, 
-    KeyboardAvoidingView, View,
+    KeyboardAvoidingView, View, AsyncStorage
 } from 'react-native';
 import { Input, TextLink, Loading, Button } from './ui';
 
 import axios from 'axios'
-import deviceStorage from '../../service'
 
-import Toast from 'react-native-tiny-toast'
+
 import {h,w} from '../../constants'
 
 
@@ -20,6 +19,7 @@ export default class LoginLogic extends Component {
       username: '',
       password: '',
       error: '',
+      jwt:'',
       loading: false
     };
 
@@ -27,27 +27,62 @@ export default class LoginLogic extends Component {
     this.onLoginFail = this.onLoginFail.bind(this);
   }
 
-  loginUser() {
-    const { username, password } = this.state;
-
-    this.setState({ error: '', loading: true });
-
-    axios.post("http://192.168.31.237:8000/api/loginClient/",{
-        username: username,
-        password: password
-    })
-    .then((response) => {
-      console.log(response.data)
-      this.props.navigation.navigate('Home')
-      deviceStorage.saveItem("id_token", response.data.access_token);
-      console.log(response.data.access_token)
-      console.log(response.data.username)
-    })
-    .catch((error) => {
-      console.log(error);
-      this.onLoginFail();
-    });
+  showData = async (key) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value !== null) {
+          // We have data!!
+          console.log( JSON.parse(value), 'I am here!!!!!');
+          this.props.navigation.navigate('Home') 
+          return value
+      }
+  } catch (error) {
+      // Error retrieving data
+      console.log(error)
   }
+  }
+ 
+  loginUser = () => {
+      const { username, password } = this.state;
+  
+      this.setState({ error: '', loading: true });
+  
+      axios.post("http://192.168.31.237:8000/api/loginClient/",{
+          username: username,
+          password: password
+      })
+      .then((response) => {
+        // console.log(response.data)
+        // store.saveItem("id_token", response.data.access_token);
+        // console.log(store.readData("id_token"))
+        // this.props.navigation.navigate('Home')
+        // console.log(response.data.access_token)
+        // console.log(response.data.username)
+
+        const data = response.data
+        console.log(response.data)
+        AsyncStorage.setItem('key',JSON.stringify(data), (err)=> {
+          if(err){
+              console.log("an error");
+              throw err;
+          }
+          console.log("JWT success");
+      }).catch((err)=> {
+          console.log("error is: " + err);
+      })
+      .then(() => {
+        this.showData('key')
+      })
+      }) .catch((error) => {
+        console.log(error);
+        this.onLoginFail();
+      });  
+      
+
+    }
+
+   
+
 
  
   onLoginFail() {
