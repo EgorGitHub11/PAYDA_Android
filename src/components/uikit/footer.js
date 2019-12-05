@@ -18,7 +18,7 @@ export default class Footer extends Component {
     const {bottomContainer,bottomIconTouchable,text} = styles
     return (
       <View style={bottomContainer}>
-        <TouchableOpacity style={bottomIconTouchable}>
+        <TouchableOpacity style={bottomIconTouchable} onPress={ () => this.props.navigation.navigate('Nofications') }>
           {myBottomIcon1}
           <Text style={text}>Уведомления</Text>
         </TouchableOpacity>
@@ -40,16 +40,18 @@ export default class Footer extends Component {
 const styles = StyleSheet.create({
     bottomContainer:{
         backgroundColor: '#F03C49',
-        padding:10,
         flexDirection: "row",
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 50,
+        paddingVertical:5
       },
       bottomIconTouchable:{
+        flexDirection:'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       },
       text:{
         color: '#fff',
+        fontSize:10
       }
 });

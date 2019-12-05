@@ -52,7 +52,7 @@ export default class HomeScreen extends Component {
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
         <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'} />
-        <View>
+        {/* <View>
               {username ?
                 <Text style={emailText}>
                   Your username: {username}
@@ -61,7 +61,7 @@ export default class HomeScreen extends Component {
                 <Text style={errorText}>
                   {error}
                 </Text>}
-            </View>
+            </View> */}
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay/>

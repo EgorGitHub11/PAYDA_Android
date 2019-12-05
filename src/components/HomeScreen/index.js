@@ -10,6 +10,7 @@ import certificateOfCompletion from '../../screens/screen3/certificateOfCompleti
 import deliveryNote from '../../screens/screen4/deliveryNote'
 import HomeScreen from './HomeScreen';
 import Inbox from '../Inbox/Inbox'
+import Nofications from '../Notifications/Notifications'
 import Profile from '../Profile/profile'
 
 export default class index extends Component {
@@ -28,7 +29,8 @@ const AppNavigator = createStackNavigator(
       certificateOfCompletion:{screen:certificateOfCompletion},
       deliveryNote:{screen:deliveryNote},
       Inbox:{screen:Inbox},
-      Profile:{screen:Profile}
+      Profile:{screen:Profile},
+      Nofications: {screen:Nofications}
     },
     {
       headerMode:'none',

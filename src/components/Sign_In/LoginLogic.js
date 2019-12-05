@@ -28,7 +28,7 @@ export default class LoginLogic extends Component {
   }
 
   loginUser() {
-    const { username, password, password_confirmation } = this.state;
+    const { username, password } = this.state;
 
     this.setState({ error: '', loading: true });
 

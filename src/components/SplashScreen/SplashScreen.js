@@ -13,7 +13,7 @@ export default class SplashScreen extends Component {
 
   UNSAFE_componentWillMount = () => {
     setTimeout(() => {
-        this.props.navigation.navigate('SignIn')
+        this.props.navigation.navigate('Home')
     }, 3000)
   };
   
