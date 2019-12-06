@@ -47,7 +47,7 @@ export default class invoice extends Component {
     const {mainContainer, titleBlock, formBlock, titleText, addBlock} = styles
     return (
       <View style={mainContainer}>
-         <Header name={'Счет фактура'}/>
+         <Header name={'СЧЕТ ФАКТУРА'}/>
          <View style={titleBlock}>
             <Text style={titleText}>
                 {docNumber}

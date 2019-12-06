@@ -27,7 +27,7 @@ export default class Profile extends Component {
               <Finansu navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }> 
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('CalendarEv') }> 
               <Calendar navigation={this.props.navigation}/>
             </TouchableOpacity>
 

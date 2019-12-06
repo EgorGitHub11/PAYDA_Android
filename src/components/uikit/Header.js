@@ -29,6 +29,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     container:{
+        width:w,
         flexDirection:'row',
         backgroundColor: '#F03C49',
         justifyContent: 'space-between',

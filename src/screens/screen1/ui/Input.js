@@ -29,7 +29,7 @@ const styles = {
     alignItems: 'center'
   },
   inputStyle: {
-    width:w,
+    width: w,
     height: 40,
     marginVertical: 10,
     textAlign: 'center',

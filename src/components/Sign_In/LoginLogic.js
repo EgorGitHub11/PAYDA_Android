@@ -32,7 +32,7 @@ export default class LoginLogic extends Component {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {
           // We have data!!
-          console.log( JSON.parse(value), 'I am here!!!!!');
+          console.log( JSON.parse(value), '******I am in async storage!*******');
           this.props.navigation.navigate('Home') 
           return value
       }
@@ -66,7 +66,7 @@ export default class LoginLogic extends Component {
               console.log("an error");
               throw err;
           }
-          console.log("JWT success");
+          console.log("******JWT success saved******");
       }).catch((err)=> {
           console.log("error is: " + err);
       })

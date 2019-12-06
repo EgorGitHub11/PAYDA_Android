@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+
+import Header from '../../components/uikit/Header'
+
+import {w,h} from '../../constants'
 
 export default class deliveryNote extends Component {
   constructor(props) {
@@ -9,10 +13,32 @@ export default class deliveryNote extends Component {
   }
 
   render() {
+    const {childMainContainer, mainContainer} = styles
     return (
-      <View>
-        <Text> deliveryNote </Text>
+      <View style={mainContainer}>
+         <Header navigation={this.props.navigation} name={'НАКЛАДНАЯ НА ОТПУСК'}/>
+        <View style={childMainContainer}>
+            
+        </View>
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  childMainContainer:{
+    flex:1,
+    width:w,
+    backgroundColor:'#fff',
+    flexDirection:'column',
+    justifyContent:'flex-start',
+    alignContent: 'center',
+    flexWrap:'wrap'
+  },
+  mainContainer:{
+    flex:1,
+    backgroundColor:'#fff',
+    justifyContent:'center',
+  }
+});
