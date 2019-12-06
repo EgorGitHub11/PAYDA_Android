@@ -32,7 +32,7 @@ const AppNavigator = createStackNavigator(
       Inbox:{screen:Inbox},
       Profile:{screen:Profile},
       Nofications: {screen:Nofications},
-      CalendarEv:{screen:CalendarEv}
+      CalendarEv:{screen:CalendarEv},
     },
     {
       headerMode:'none',

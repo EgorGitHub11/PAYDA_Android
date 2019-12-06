@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar, CalendarList, Agenda, CalendarTheme} from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
 
 import Header from '../uikit/Header'
 import {w,h} from '../../constants'
 
-LocaleConfig.locales['fr'] = {
-  monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-  monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
-  dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-  dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
-  today: 'Aujourd\'hui'
-};
-LocaleConfig.defaultLocale = 'fr';
+<Agenda
+  items={{
+    '2012-05-22': [{text: 'item 1 - any js object'}],
+    '2012-05-23': [{text: 'item 2 - any js object'}],
+    '2012-05-24': [],
+    '2019-12-25': [{text: 'item 3 - any js object'},{text: 'any js object'}]
+  }}
+/>
 
 export default class CalendarEvents extends Component {
   constructor(props) {
@@ -28,14 +28,7 @@ export default class CalendarEvents extends Component {
       <View style={mainContainer}>
          <Header navigation={this.props.navigation} name={'КАЛЕНДАРЬ'}/>
         <View style={childMainContainer}>
-           <Calendar
-        //    markedDates={{
-        //     '2019-12-16': {selected: true, marked: true, selectedColor: 'blue'},
-        //     '2019-12-17': {marked: true},
-        //     '2019-12-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-        //     '2019-12-19': {disabled: true, disableTouchEvent: true}
-        //   }}
-           />
+          <Agenda/>
         </View>
       </View>
     );
