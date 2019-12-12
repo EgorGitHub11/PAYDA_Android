@@ -24,7 +24,7 @@ export default class HomeScreen extends Component {
     }
   }
 
-  
+
 
   render() {
     const { username, error} = this.state
@@ -32,7 +32,7 @@ export default class HomeScreen extends Component {
     return (
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
-        <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'} />
+        <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'}/>
         <View style={childMainContainer}>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay navigation={this.props.navigation}/>

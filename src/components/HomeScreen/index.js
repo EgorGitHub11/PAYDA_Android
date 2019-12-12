@@ -13,6 +13,7 @@ import Inbox from '../Inbox/Inbox'
 import Nofications from '../Notifications/Notifications'
 import Profile from '../Profile/profile'
 import CalendarEv from '../Calendar/Calendar'
+import Chat from '../Chat/Chat'
 
 export default class index extends Component {
   render() {
@@ -33,6 +34,7 @@ const AppNavigator = createStackNavigator(
       Profile:{screen:Profile},
       Nofications: {screen:Nofications},
       CalendarEv:{screen:CalendarEv},
+      Chat:{screen:Chat}
     },
     {
       headerMode:'none',

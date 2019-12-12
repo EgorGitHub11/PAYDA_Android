@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, AsyncStorage} from 'react-native';
 
 import Finansu from './ui/finansu'
 import Calendar from './ui/calendar'
@@ -16,6 +16,7 @@ export default class Profile extends Component {
     this.state = {
     };
   }
+
 
   render() {
     const {childMainContainer, mainContainer} = styles
@@ -35,7 +36,7 @@ export default class Profile extends Component {
               <Agent navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Chat') }>
               <Message navigation={this.props.navigation}/>
             </TouchableOpacity>
         </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, Button, TouchableOpacity, AsyncStorage} from 'react-native';
 import {h,w} from '../../constants'
 
 import Inbox from '../Inbox/Inbox'
@@ -19,7 +19,7 @@ export default class Header extends Component {
     return (
         <View style={container}>
             <Text style={headerTitle}>{this.props.name}</Text>
-            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Profile')}>
+            <TouchableOpacity style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}} onPress={() => this.props.navigation.navigate('Profile')}>
                 {myIcon}
             </TouchableOpacity>
         </View>

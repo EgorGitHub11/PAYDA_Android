@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
 export default class Chat extends Component {

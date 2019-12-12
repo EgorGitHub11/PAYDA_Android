@@ -19,15 +19,14 @@ const styles = {
   button:{
     width:w / 2,
     marginTop: 10,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: 'grey',
+    backgroundColor:'#F03C49',
     paddingVertical: 15,
     marginBottom: 10,
+    borderRadius: 30,
   },
   buttonText:{
     textAlign: 'center',
-    color: 'grey',
+    color: '#fff',
     fontSize: 20,
   },
 };
