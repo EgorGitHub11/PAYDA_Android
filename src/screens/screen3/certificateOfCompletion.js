@@ -65,7 +65,7 @@ export default class certificateOfCompletion extends Component {
            services,unit,count,price,addings,
            pk,jwt} = this.state
 
-    const url = `http://192.168.31.237:8000/api/sendInvoicePayment/${pk}/`
+    const url = `http://192.168.31.237:8000/api/sendCompletion/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
 

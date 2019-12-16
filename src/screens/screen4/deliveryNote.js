@@ -66,7 +66,7 @@ export default class deliveryNote extends Component {
            addings,
            pk,jwt} = this.state
 
-    const url = `http://192.168.31.237:8000/api/sendInvoicePayment/${pk}/`
+    const url = `http://192.168.31.237:8000/api/sendNote/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
 
@@ -100,7 +100,7 @@ export default class deliveryNote extends Component {
       const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-      <Header name={'АКТ ВЫПОЛНЕНЫХ РАБОТ'}/>
+      <Header name={'НАКЛАДНАЯ НА ОТПУСК ТОВАРА'}/>
      <ScrollView>
          <View style={formBlock}>
            <Reinput

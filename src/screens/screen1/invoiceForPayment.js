@@ -94,13 +94,8 @@ export default class InvoiceForPayment extends Component {
     .then(function (response) {
       console.log(response);
       if (response.status >= 200 && response.status < 300) {
-        let changeState = () => {
-          this.setState({buyer:""})
-          this.setState({contract:""})
-          // console.log('DONE!,DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!')
-          // Toast.showSuccess('Post success')
-          this.setState({loading: false})
-        }
+        console.log('ura!')
+        this.props.navigation.navigate('Home')
       }
     })
     .catch(function (error) {
@@ -206,9 +201,9 @@ export default class InvoiceForPayment extends Component {
               </View>
               <View style={mainBtn}>
               {!loading ?
-                <Button onPress={() => this.postData()}>
+                <BButton onPress={() => this.postData()}>
                   <Text style={{fontStyle: 'italic', fontSize:30}}>Отправить</Text>
-                </Button>
+                </BButton>
                 :
                 <Loading size={'large'} />
               }

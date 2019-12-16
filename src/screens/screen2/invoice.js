@@ -80,7 +80,7 @@ export default class invoice extends Component {
       bank, bik, leader, recipient,iik_recipient,iin_recipient,
       bank_recipient,bik_recipient, pk, jwt, addings} = this.state
 
-    const url = `http://192.168.31.237:8000/api/sendInvoicePayment/${pk}/`
+    const url = `http://192.168.31.237:8000/api/sendInvoice/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
 
