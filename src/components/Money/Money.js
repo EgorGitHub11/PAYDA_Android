@@ -7,7 +7,7 @@ import {Button} from './ui'
 import axios from 'axios'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const myIcon = <Icon name="assignment" size={30} color="#528156" />;
+const myIcon = <Icon name="tune" size={30} color="#528156" />;
 
 export default class Money extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export default class Money extends Component {
     };
   }
 
+ 
   componentDidMount(){
     this.showData = async () => {
       try {
@@ -58,10 +59,12 @@ export default class Money extends Component {
         this.setState({sum_earn:a})
         this.setState({sum_spend:b})
 
-        console.log(this.state.sum_spend + ' ' + 'расход' + ' ' + this.state.sum_earn + ' ' + 'доход')
-        console.log(this.state.arr + ' ' + 'cool')
+        // console.log(this.state.sum_spend + ' ' + 'расход' + ' ' + this.state.sum_earn + ' ' + 'доход')
+        // console.log(this.state.arr + ' ' + 'cool')
       })
   }
+
+  
 
   render() {
     const {arr, jwt, sum_spend, sum_earn} =this.state
@@ -70,7 +73,8 @@ export default class Money extends Component {
            blockEarn,blockFilter,blockSpend, notiffy, 
            notifyInside, notifyInsideInfText, notifyInsideBlock,
            notifyText,notifyDateAndFromWho,firstTitle,
-           thecondTitle, btnsblock, scroll, textEarn, textSpend, bigTextEarn, bigTextSpend} = styles
+           thecondTitle, btnsblock, scroll, textEarn, textSpend, 
+           bigTextEarn, bigTextSpend,notifyDateAndFromWhoBlue} = styles
 
     return (
         <View style={mainContainer}>
@@ -99,7 +103,7 @@ export default class Money extends Component {
                 </Text>
                 <Text> / </Text>
                 <Text style={textSpend}>
-                    {sum_spend}
+                    {sum_spend} 
                 </Text>
             </View>
 
@@ -108,7 +112,7 @@ export default class Money extends Component {
                     Расходы
                 </Text>
                 <Text  style={bigTextSpend}>
-                    {sum_spend}
+                    {sum_spend} тг
                 </Text>
             </View>
 
@@ -122,7 +126,7 @@ export default class Money extends Component {
                             <View style={notifyInsideBlock}>
                                 <View style={notifyInside}>
                                 <Text style={notifyDateAndFromWho}>{i.money} тг</Text>
-                                <Text style={notifyDateAndFromWho}>{i.date}</Text>
+                                <Text style={notifyDateAndFromWhoBlue}>{i.date}</Text>
                                 </View>
                             </View>
 
@@ -136,23 +140,42 @@ export default class Money extends Component {
             </ScrollView>
           
             <View style={btnsblock}>
-            <Button>
+            <Button  onPress={ () => this.props.navigation.navigate('AllSpend') }>
                     <Text>Показать все</Text>
             </Button> 
 
-            <Button>
+            <Button onPress={ () => this.props.navigation.navigate('Create') }>
                     <Text>Создать расход</Text>
             </Button> 
             </View>
            </View>
 {/* **************************************** */}
            <View style={blockEarn}>
+           <View style={firstTitle}>
+                <Text>
+                    
+                </Text>
+                <Text>  </Text>
+                <Text>
+                    
+                </Text>
+            </View>
+
+           <View style={firstTitle}>
+                <Text style={textEarn}>
+                    
+                </Text>
+                <Text> </Text>
+                <Text style={textSpend}>
+                    
+                </Text>
+            </View>
             <View style={thecondTitle}>
                 <Text style={bigTextEarn}>
                     Доход
                 </Text>
                 <Text  style={bigTextEarn}>
-                    {sum_earn}
+                    {sum_earn} тг
                 </Text>
             </View>
             <ScrollView style={scroll}>
@@ -165,7 +188,7 @@ export default class Money extends Component {
                             <View style={notifyInsideBlock}>
                                 <View style={notifyInside}>
                                 <Text style={notifyDateAndFromWho}>{i.money} тг</Text>
-                                <Text style={notifyDateAndFromWho}>{i.date}</Text>
+                                <Text style={notifyDateAndFromWhoBlue}>{i.date}</Text>
                                 </View>
                             </View>
 
@@ -179,12 +202,12 @@ export default class Money extends Component {
             </ScrollView>
           
             <View style={btnsblock}>
-            <Button>
+            <Button onPress={ () => this.props.navigation.navigate('AllEarn') }>
                     <Text>Показать все</Text>
             </Button> 
 
-            <Button>
-                    <Text>Создать расход</Text>
+            <Button onPress={ () => this.props.navigation.navigate('CreateEarn')}>
+                    <Text>Создать чек</Text>
             </Button> 
             </View>
            </View>
@@ -212,7 +235,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
     },
     blockSpend:{
-        flex:8,
+        flex:5,
         width:w,
         flexDirection:'column',
         justifyContent:'center',
@@ -225,10 +248,14 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         flexDirection:'row',
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        paddingHorizontal:20,
+        borderBottomWidth:1,
+        borderColor:'grey',
+        marginBottom: 10,
     },
     blockEarn:{
-        flex:8,
+        flex:5,
         width:w,
         backgroundColor:'#fff',
         flexDirection:'column',
@@ -278,6 +305,10 @@ const styles = StyleSheet.create({
         fontSize:17,
         color:'grey'
       },
+      notifyDateAndFromWhoBlue:{
+        fontSize:17,
+        color:'blue'
+      },
     //   
     firstTitle:{
         width:w,
@@ -299,7 +330,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     scroll:{
-        height: h /7 
+        height: h / 7,
     },
     bigTextEarn:{
         fontSize:20,
@@ -311,10 +342,10 @@ const styles = StyleSheet.create({
     },
     textEarn:{
         color:'green',
-        fontSize:20
+        fontSize:22
     },
     textSpend:{
         color:'red',
-        fontSize:20
+        fontSize:22
     }
   });

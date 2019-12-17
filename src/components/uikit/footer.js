@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         paddingHorizontal: 50,
-        paddingVertical:5
+        paddingVertical:5,
+        marginTop:5
       },
       bottomIconTouchable:{
         flexDirection:'column',

@@ -16,6 +16,10 @@ import CalendarEv from '../Calendar/Calendar'
 import Chat from '../Chat/Chat'
 import Agent from '../Agent/Agent'
 import Money from '../Money/Money'
+import Create from '../uikit/Create'
+import CreateEarn from '../uikit/CreatEarn'
+import AllEarn from '../Money/AllEarn'
+import AllSpend from '../Money/AllSpend'
 
 export default class index extends Component {
   render() {
@@ -38,7 +42,11 @@ const AppNavigator = createStackNavigator(
       CalendarEv:{screen:CalendarEv},
       Chat:{screen:Chat},
       Agent: {screen:Agent},
-      Money:{screen:Money}
+      Money:{screen:Money},
+      Create:{screen:Create},
+      CreateEarn:{screen:CreateEarn},
+      AllEarn:{screen:AllEarn},
+      AllSpend:{screen:AllSpend}
     },
     {
       headerMode:'none',
