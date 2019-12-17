@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, AsyncStorage} from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, AsyncStorage,ScrollView} from 'react-native';
 import Header from '../uikit/Header'
 import {h,w} from '../../constants'
 
@@ -20,15 +20,54 @@ export default class HomeScreen extends Component {
     this.state = {
       username: '',
       error: '',
-      jwt: ''
+      jwt: '',
+      arrNotify: [],
+      name: '',
+      pk: '',
     }
+  }
+
+  componentDidMount(){
+    this.showData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('key');
+        if (value !== null) {
+            const dataJson = JSON.parse(value)
+            const {pk,name,access_token} = dataJson
+            this.setState(prevState => ({
+              pk: prevState.pk + pk,
+              name: prevState.name + name,
+              jwt: prevState.jwt + access_token
+            }))
+            console.log('I am in showData' + ' ' + this.state.pk)
+            return dataJson
+        }
+    } catch (error) {
+        console.log(error)
+    }
+    }
+    this.showData().then(() => this.getData())
+  }
+
+  getData(){
+    const {pk,jwt} = this.state
+    const url = `http://192.168.31.237:8000/api/clientNotifications/${pk}/`
+
+      axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
+      axios.get(url)
+      .then((response) => {
+        this.setState({arrNotify: response.data})
+        console.log(this.state.arrNotify + ' ' + 'cool')
+      })
   }
 
 
 
   render() {
-    const { username, error} = this.state
-    const {mainContainer, childMainContainer,bottomContainer, errorText, emailText} = styles
+    const { username, error, arrNotify, name} = this.state
+    const {mainContainer, childMainContainer,bottomContainer, errorText, emailText,notiffy, 
+      notifyInside, notifyInsideInfText, notifyInsideBlock,
+      notifyText,notifyDateAndFromWho, notifyBlockk} = styles
     return (
       <View style={mainContainer}>
         <StatusBar backgroundColor="grey"/>
@@ -49,8 +88,28 @@ export default class HomeScreen extends Component {
             <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
               <DeliveryNote/>
             </TouchableOpacity>
-
         </View>
+
+        <View style={notifyBlockk}>
+              <ScrollView>
+              {
+              arrNotify.map(notify => (
+              console.log(notify),
+              <View style={notiffy}>
+              <View style={notifyInsideBlock}>
+                  <View style={notifyInside}>
+                  <Text style={notifyDateAndFromWho}>{notify.created}</Text>
+                  </View>
+              </View>
+
+              <View style={notifyInsideInfText}>
+              <Text style={notifyText}>{notify.message}</Text>
+              </View>
+          </View>
+
+            ))}
+              </ScrollView>
+            </View>
 
        <Footer navigation={this.props.navigation}/>
 
@@ -68,7 +127,7 @@ const styles = StyleSheet.create({
   childMainContainer:{
     flex:1,
     backgroundColor:'#fff',
-    flexDirection:'row',
+    flexDirection:'column',
     justifyContent:'center',
     alignContent: 'center',
     flexWrap:'wrap'
@@ -82,5 +141,47 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 18,
     color: 'red'
+  },
+  notiffy:{
+    width: w,
+    height: 'auto',
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#EEEFF3',
+  },
+  notifyBlockk:{
+    height: h / 6,
+    flexDirection: 'column',
+    justifyContent:'center',
+    alignItems: 'center'
+  },
+  notifyInside:{
+    flexDirection: 'row',
+    justifyContent:'flex-start',
+    alignItems:'center'
+  },
+  notifyInsideBlock:{
+    flexDirection: 'row',
+    justifyContent:'center',
+    alignItems:'center',
+    paddingHorizontal:10,
+  },
+  notifyInsideInfText:{
+    flexDirection: 'row',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    marginTop:20,
+    marginBottom:20,
+    marginRight:20,
+  },
+  notifyText:{
+    fontSize:20,
+    color:'black'
+  },
+  notifyDateAndFromWho:{
+    fontSize:17,
+    color:'grey'
   }
 });
