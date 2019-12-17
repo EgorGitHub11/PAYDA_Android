@@ -104,7 +104,7 @@ submitChatMessage() {
                 console.log(msg),
                 msg.from_client === true 
                 ? 
-                <View style={{justifyContent: 'center', alignItems:'flex-end', borderWidth:1, borderColor:'#fff', borderRadius:25}}>
+                <View style={{justifyContent: 'center', alignItems:'flex-end'}}>
                 <View style={notifyClient}>
                 <View style={notifyInsideBlock}>
                     <View style={notifyInside}>
@@ -211,7 +211,11 @@ const styles = StyleSheet.create({
     margin: 10,
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor:'#fff',
+    borderRadius:25,
+    padding:10
   },
   notifyAdmin:{
     width: w / 2,
@@ -220,7 +224,11 @@ const styles = StyleSheet.create({
     margin: 10,
     flexDirection: 'column',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor:'#fff',
+    borderRadius:25,
+    padding:10
   },
   notifyInside:{
     flexDirection: 'row',

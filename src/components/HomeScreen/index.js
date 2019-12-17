@@ -15,6 +15,7 @@ import Profile from '../Profile/profile'
 import CalendarEv from '../Calendar/Calendar'
 import Chat from '../Chat/Chat'
 import Agent from '../Agent/Agent'
+import Money from '../Money/Money'
 
 export default class index extends Component {
   render() {
@@ -36,7 +37,8 @@ const AppNavigator = createStackNavigator(
       Nofications: {screen:Nofications},
       CalendarEv:{screen:CalendarEv},
       Chat:{screen:Chat},
-      Agent: {screen:Agent}
+      Agent: {screen:Agent},
+      Money:{screen:Money}
     },
     {
       headerMode:'none',

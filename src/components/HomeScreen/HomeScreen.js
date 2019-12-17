@@ -62,7 +62,7 @@ export default class HomeScreen extends Component {
       })
       setTimeout( () => {
         this.getData()
-      },1000)
+      },60000)
   }
 
 
@@ -111,7 +111,6 @@ export default class HomeScreen extends Component {
               <Text style={notifyText}>{notify.message}</Text>
               </View>
           </View>
-
             ))}
               </ScrollView>
             </View>

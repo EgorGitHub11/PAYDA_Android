@@ -24,7 +24,7 @@ export default class Profile extends Component {
       <View style={mainContainer}>
          <Header navigation={this.props.navigation} name={'МОЙ ПРОФИЛЬ'}/>
         <View style={childMainContainer}>
-            <TouchableOpacity  onPress={() => this.props.navigation.navigate('')}>
+            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Money')}>
               <Finansu navigation={this.props.navigation}/>
             </TouchableOpacity>
 

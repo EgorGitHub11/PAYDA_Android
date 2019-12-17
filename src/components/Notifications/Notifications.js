@@ -89,7 +89,7 @@ export default class Inbox extends Component {
       })
       setTimeout( () => {
         this.getData()
-      },1000)
+      },60000)
   }
 
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     backgroundColor: '#EEEFF3',
     marginBottom: 5,
-    flexDirection: 'column-reverse',
+    flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
