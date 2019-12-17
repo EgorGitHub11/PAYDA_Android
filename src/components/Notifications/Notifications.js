@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, AsyncStorage} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, AsyncStorage, ScrollView} from 'react-native';
 
 import Header from '../uikit/Header'
 import io from 'socket.io-client/dist/socket.io'
@@ -12,7 +12,7 @@ export default class Inbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrNotify: [],
+      arrAgent: [],
       name: '',
       pk: '',
       jwt:'',
@@ -63,7 +63,7 @@ export default class Inbox extends Component {
   //     console.log(typeof(JSON.parse(e.data)) + ' ' + 'E DATAAAAAAAAAA');
   //     var jsonData = JSON.parse(e.data)
   //     console.log(jsonData);
-  //     this.setState({ arrNotify: jsonData});
+  //     this.setState({ arrAgent: jsonData});
   //     console.log(jsonData,'data json')
   //   };
   
@@ -84,15 +84,18 @@ export default class Inbox extends Component {
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
       .then((response) => {
-        this.setState({arrNotify: response.data})
-        console.log(this.state.arrNotify + ' ' + 'cool')
+        this.setState({arrAgent: response.data})
+        console.log(this.state.arrAgent + ' ' + 'cool')
       })
+      setTimeout( () => {
+        this.getData()
+      },1000)
   }
 
 
   render() {
 
-    const {arrNotify, name} = this.state
+    const {arrAgent, name} = this.state
 
     const {childMainContainer, mainContainer, notiffy, 
            notifyInside, notifyInsideInfText, notifyInsideBlock,
@@ -101,8 +104,10 @@ export default class Inbox extends Component {
       <View style={mainContainer}>
          <Header navigation={this.props.navigation} name={'УВЕДОМЛЕНИЯ'}/>
         <View style={childMainContainer}>
+          <ScrollView>
           {
-            arrNotify.map(notify => (
+            arrAgent.reverse(),
+            arrAgent.map(notify => (
               console.log(notify),
               <View style={notiffy}>
               <View style={notifyInsideBlock}>
@@ -120,6 +125,7 @@ export default class Inbox extends Component {
           </View>
 
             ))}
+          </ScrollView>
         </View>
       </View>
     );
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     backgroundColor: '#EEEFF3',
     marginBottom: 5,
-    flexDirection: 'column',
+    flexDirection: 'column-reverse',
     justifyContent: 'space-around',
     alignItems: 'center'
   },

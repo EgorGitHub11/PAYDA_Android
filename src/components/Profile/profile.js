@@ -32,7 +32,7 @@ export default class Profile extends Component {
               <Calendar navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('') }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Agent') }>
               <Agent navigation={this.props.navigation}/>
             </TouchableOpacity>
 

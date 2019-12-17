@@ -11,6 +11,7 @@ import DeliveryNote from '../uikit/deliveryNote'
 import Invoice from '../uikit/invoice'
 import IForPay from '../uikit/invoiceForPayment'
 import Footer from '../uikit/footer'
+import { array } from 'prop-types';
 
 
 
@@ -59,6 +60,9 @@ export default class HomeScreen extends Component {
         this.setState({arrNotify: response.data})
         console.log(this.state.arrNotify + ' ' + 'cool')
       })
+      setTimeout( () => {
+        this.getData()
+      },1000)
   }
 
 
@@ -93,6 +97,7 @@ export default class HomeScreen extends Component {
         <View style={notifyBlockk}>
               <ScrollView>
               {
+              arrNotify.reverse(),
               arrNotify.map(notify => (
               console.log(notify),
               <View style={notiffy}>
@@ -153,7 +158,7 @@ const styles = StyleSheet.create({
   },
   notifyBlockk:{
     height: h / 6,
-    flexDirection: 'column',
+    flexDirection: 'column-reverse',
     justifyContent:'center',
     alignItems: 'center'
   },
