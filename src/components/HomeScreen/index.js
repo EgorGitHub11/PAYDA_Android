@@ -20,6 +20,8 @@ import Create from '../uikit/Create'
 import CreateEarn from '../uikit/CreatEarn'
 import AllEarn from '../Money/AllEarn'
 import AllSpend from '../Money/AllSpend'
+import Plategka from '../Pategka/Plategka'
+import CreatePlateg from '../Pategka/CreatePlateg'
 
 export default class index extends Component {
   render() {
@@ -46,7 +48,9 @@ const AppNavigator = createStackNavigator(
       Create:{screen:Create},
       CreateEarn:{screen:CreateEarn},
       AllEarn:{screen:AllEarn},
-      AllSpend:{screen:AllSpend}
+      AllSpend:{screen:AllSpend},
+      Plategka:{screen:Plategka},
+      CreatePlateg:{screen:CreatePlateg}
     },
     {
       headerMode:'none',

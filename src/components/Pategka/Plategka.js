@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView,AsyncStorage,TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, ScrollView,AsyncStorage, TouchableOpacity} from 'react-native';
 import {h,w} from '../../constants'
 import Header from '../uikit/Header'
 import Footer from '../uikit/footer'
@@ -10,7 +10,7 @@ import DatePicker from 'react-native-datepicker'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const myIcon = <Icon name="tune" size={30} color="#F03C49" />;
 
-export default class Money extends Component {
+export default class Plategka extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,8 +62,6 @@ export default class Money extends Component {
         this.setState({sum_earn:a})
         this.setState({sum_spend:b})
 
-        // console.log(this.state.sum_spend + ' ' + 'расход' + ' ' + this.state.sum_earn + ' ' + 'доход')
-        // console.log(this.state.arr + ' ' + 'cool')
       })
   }
 
@@ -89,6 +87,7 @@ export default class Money extends Component {
       })
   }
 
+
   
 
   render() {
@@ -103,10 +102,52 @@ export default class Money extends Component {
 
     return (
         <View style={mainContainer}>
-        <Header navigation={this.props.navigation} name={'ФИНАНСЫ'}/>
+        <Header navigation={this.props.navigation} name={'ПЛАТЕЖИ'}/>
        <View style={childMainContainer}>
+{/* **************************************** */}
+           <View style={blockSpend}>
+           <View style={firstTitle}>
+                <Text style={textSpend}>
+                    К ОПЛАТЕ:
+                </Text>
+            </View>
 
-       <View style={blockFilter}>
+            <ScrollView style={scroll}>
+            {
+                    arr.map(i => (
+                        !i.flag
+                        ? 
+                    <View style={notiffy}>
+                            <View style={notifyInsideBlock}>
+                                <View style={notifyInside}>
+                                <Text style={notifyDateAndFromWho}>{i.money} тг</Text>
+                                <Text style={notifyDateAndFromWhoBlue}>{i.date}</Text>
+                                </View>
+                            </View>
+
+                            <View style={notifyInsideInfText}>
+                            <Text style={notifyText}>{i.name}</Text>
+                            </View>
+                    </View>
+                    :
+                    null
+                  ))}
+            </ScrollView>
+          
+            <View style={btnsblock}>
+            <Button onPress={ () => this.props.navigation.navigate('CreatePlateg') }>
+                    <Text>Создать платеж</Text>
+            </Button> 
+            </View>
+           </View>
+{/* **************************************** */}
+           <View style={blockEarn}>
+           <View style={firstTitle}>
+                <Text style={textSpend}>
+                     АРХИВ
+                </Text>
+            </View>
+            <View style={blockFilter}>
            <DatePicker
         style={{width: 150}}
         date={date1}
@@ -131,7 +172,7 @@ export default class Money extends Component {
         }}
         onDateChange={(date1) => {this.setState({date1: date1})}}
       />
-      
+
       <TouchableOpacity onPress={this.getFilteredData}>
           {myIcon}
       </TouchableOpacity>
@@ -162,99 +203,7 @@ export default class Money extends Component {
       />
            
            </View>
-{/* **************************************** */}
-           <View style={blockSpend}>
-           <View style={firstTitle}>
-                <Text>
-                    Доход
-                </Text>
-                <Text> / </Text>
-                <Text>
-                    Расход
-                </Text>
-            </View>
 
-           <View style={firstTitle}>
-                <Text style={textEarn}>
-                    {sum_earn}
-                </Text>
-                <Text> / </Text>
-                <Text style={textSpend}>
-                    {sum_spend} 
-                </Text>
-            </View>
-
-            <View style={thecondTitle}>
-                <Text style={bigTextSpend}>
-                    Расходы
-                </Text>
-                <Text  style={bigTextSpend}>
-                    {sum_spend} тг
-                </Text>
-            </View>
-
-
-            <ScrollView style={scroll}>
-            {
-                    arr.map(i => (
-                        !i.flag
-                        ? 
-                    <View style={notiffy}>
-                            <View style={notifyInsideBlock}>
-                                <View style={notifyInside}>
-                                <Text style={notifyDateAndFromWho}>{i.money} тг</Text>
-                                <Text style={notifyDateAndFromWhoBlue}>{i.date}</Text>
-                                </View>
-                            </View>
-
-                            <View style={notifyInsideInfText}>
-                            <Text style={notifyText}>{i.name}</Text>
-                            </View>
-                    </View>
-                    :
-                    null
-                  ))}
-            </ScrollView>
-          
-            <View style={btnsblock}>
-            <ButtonLookAll onPress={ () => this.props.navigation.navigate('AllSpend') }>
-                    <Text>Показать все</Text>
-            </ButtonLookAll> 
-
-            <Button onPress={ () => this.props.navigation.navigate('Create') }>
-                    <Text>Создать расход</Text>
-            </Button> 
-            </View>
-           </View>
-{/* **************************************** */}
-           <View style={blockEarn}>
-           <View style={firstTitle}>
-                <Text>
-                    
-                </Text>
-                <Text>  </Text>
-                <Text>
-                    
-                </Text>
-            </View>
-
-           <View style={firstTitle}>
-                <Text style={textEarn}>
-                    
-                </Text>
-                <Text> </Text>
-                <Text style={textSpend}>
-                    
-                </Text>
-            </View>
-            <View style={thecondTitle}>
-                <Text style={bigTextEarn}>
-                    Доход
-                </Text>
-                <Text  style={bigTextEarn}>
-                    {sum_earn} тг
-                </Text>
-            </View>
             <ScrollView style={scroll}>
               {
                     
@@ -277,16 +226,6 @@ export default class Money extends Component {
                     null
                   ))}
             </ScrollView>
-          
-            <View style={btnsblock}>
-            <ButtonLookAll onPress={ () => this.props.navigation.navigate('AllEarn') }>
-                    <Text>Показать все</Text>
-            </ButtonLookAll> 
-
-            <Button onPress={ () => this.props.navigation.navigate('CreateEarn')}>
-                    <Text>Создать чек</Text>
-            </Button> 
-            </View>
            </View>
 
            <Footer navigation={this.props.navigation}/>
@@ -317,6 +256,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
+        backgroundColor:'#fff',
     },
     blockFilter:{
         flex:1,
@@ -325,9 +265,11 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
+        marginTop:10,
         paddingHorizontal:20,
-        borderBottomWidth:1,
+        borderTopWidth:1,
         borderColor:'#EEEFF3',
+        marginBottom: 10,
     },
     blockEarn:{
         flex:6,
@@ -335,7 +277,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         flexDirection:'column',
         justifyContent:'center',
-        alignItems:'center',
+        alignItems:'center'
     },
     // notify
     notiffy:{
@@ -390,6 +332,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
+        margin:10
     },
     thecondTitle:{
         width:w,

@@ -28,7 +28,7 @@ export default class Footer extends Component {
           <Text style={text}>Архив</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={bottomIconTouchable} onPress={ () => this.props.navigation.navigate('Money') }>
+        <TouchableOpacity style={bottomIconTouchable} onPress={ () => this.props.navigation.navigate('Plategka') }>
           {myBottomIcon3}
           <Text style={text}>Платежи</Text>
         </TouchableOpacity>
