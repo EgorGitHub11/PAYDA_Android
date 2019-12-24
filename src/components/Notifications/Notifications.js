@@ -5,6 +5,7 @@ import Header from '../uikit/Header'
 import io from 'socket.io-client/dist/socket.io'
 import {w,h} from '../../constants'
 import axios from 'axios'
+import {mainUrl} from '../../config'
 
 var ws;
 
@@ -79,8 +80,8 @@ export default class Inbox extends Component {
 
   getData(){
     const {pk,jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/clientNotifications/${pk}/`
-
+    const url = mainUrl+`/api/clientNotifications/${pk}/`
+    console.log(url)
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
       .then((response) => {
@@ -107,6 +108,8 @@ export default class Inbox extends Component {
           <ScrollView>
           {
             arrAgent.reverse(),
+            arrAgent.from_user == true 
+            ?
             arrAgent.map(notify => (
               console.log(notify),
               <View style={notiffy}>
@@ -124,7 +127,10 @@ export default class Inbox extends Component {
               </View>
           </View>
 
-            ))}
+            ))
+          :
+          <Text>Нет уведомлений</Text>
+          }
           </ScrollView>
         </View>
       </View>

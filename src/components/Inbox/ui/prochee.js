@@ -4,7 +4,7 @@ import {w,h} from '../../../constants'
 import {stylesItemInbox} from '../../../constants'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const myIcon = <Icon name="folder-open" size={35} color="#F03C49" />;
+const myIcon = <Icon name="folder-open" size={35} color="#2980b9" />;
 
 export default class Prochee extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class Prochee extends Component {
     return (
       <View style={stylesItemInbox.mainContainer}>
         {myIcon}
-        <Text style={stylesItemInbox.text}> Прочие </Text>
+        <Text style={stylesItemInbox.text}> Чеки </Text>
       </View>
     );
   }

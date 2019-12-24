@@ -18,17 +18,20 @@ const Button = ({ onPress, children }) => {
 
 const styles = {
   button:{
-    width:w / 2,
+    width:w / 2.5,
+    height: h / 15,
     marginTop: 10,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: 'grey',
+    backgroundColor:'#2980b9',
     paddingVertical: 15,
+    borderRadius: 30,
+    margin:20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText:{
     textAlign: 'center',
-    color: 'grey',
-    fontSize: 20,
+    color: '#fff',
+    fontSize: 18,
   },
 };
 

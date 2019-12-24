@@ -20,7 +20,7 @@ const styles = {
     width:w / 2.5,
     height: h / 15,
     marginTop: 10,
-    backgroundColor:'#F03C49',
+    backgroundColor:'#2980b9',
     paddingVertical: 15,
     borderRadius: 30,
     margin:20,

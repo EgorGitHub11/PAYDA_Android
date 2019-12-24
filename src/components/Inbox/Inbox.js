@@ -24,23 +24,23 @@ export default class Inbox extends Component {
       <View style={mainContainer}>
          <Header navigation={this.props.navigation} name={'АРХИВ'}/>
         <View style={childMainContainer}>
-            <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
+            <TouchableOpacity  onPress={() => this.props.navigation.navigate('Contracts')}>
               <Dogovor navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoiceForPayment') }> 
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Order') }> 
               <Plateg navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoiceForPayment') }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Docs') }>
               <Act navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoiceForPayment') }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Form') }>
               <Declar navigation={this.props.navigation}/>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ () => this.props.navigation.navigate('dinvoiceForPayment') }>
+            <TouchableOpacity onPress={ () => this.props.navigation.navigate('Checks') }>
               <Prochee navigation={this.props.navigation}/>
             </TouchableOpacity>
         </View>

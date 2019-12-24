@@ -7,6 +7,8 @@ import {w,h} from '../../constants'
 
 import axios from 'axios'
 
+import {mainUrl} from '../../config'
+
 export default class Agent extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,7 @@ export default class Agent extends Component {
 
   getData(){
     const {pk,jwt,arrAgent} = this.state
-    const url = `http://192.168.31.237:8000/api/myAgent/${pk}/`
+    const url = mainUrl+`/api/myAgent/${pk}/`
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)

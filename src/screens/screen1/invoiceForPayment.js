@@ -4,7 +4,6 @@ import { View, Text, StyleSheet, ScrollView, AsyncStorage, FlatList } from 'reac
 import Toast from 'react-native-tiny-toast'
 import Reinput from 'reinput'
 import axios from 'axios'
-import { TextInput } from 'react-native-paper';
 
 import Header from '../../components/uikit/Header'
 import {Input,Button,Loading} from './ui'

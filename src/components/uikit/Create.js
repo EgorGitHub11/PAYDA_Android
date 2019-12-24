@@ -9,6 +9,8 @@ import Footer from './footer'
 import {Input,Button,Loading} from '../Money/ui'
 import BButton from './mainBigBtn'
 import {w,h} from '../../constants'
+import {mainUrl} from '../../config'
+import DatePicker from 'react-native-datepicker'
 
 export default class Create extends Component {
   constructor(props) {
@@ -45,7 +47,7 @@ export default class Create extends Component {
 
   postData(){
     const {date,money,name,flag,jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/finance/`
+    const url = mainUrl+`/api/finance/`
   
     axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
     axios.post(url, {
@@ -84,11 +86,30 @@ export default class Create extends Component {
                <View style={addBlock}>
                 <Text style={titleText}>Заполните поля</Text>
               </View>
-              <Reinput
-              label="Дата"
-              value={date}
-              onChangeText={date => this.setState({ date })}
-              />
+              <DatePicker
+        style={{width: 200}}
+        date={date}
+        mode="date"
+        placeholder="выберете дату"
+        format="YYYY-MM-DD"
+        minDate="2019-12-01"
+        maxDate="2025-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {this.setState({date: date})}}
+      />
               <Reinput
               label="Сумма"
               value={money}

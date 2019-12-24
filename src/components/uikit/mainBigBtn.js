@@ -19,7 +19,7 @@ const mainBigBtn = ({ onPress, children }) => {
     button:{
       width:w,
       marginTop: 10,
-      backgroundColor:'#F03C49',
+      backgroundColor:'#2980b9',
       paddingVertical: 15,
     },
     buttonText:{

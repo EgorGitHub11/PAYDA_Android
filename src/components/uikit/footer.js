@@ -39,7 +39,7 @@ export default class Footer extends Component {
 
 const styles = StyleSheet.create({
     bottomContainer:{
-        backgroundColor: '#F03C49',
+        backgroundColor: '#2980b9',
         flexDirection: "row",
         justifyContent: 'space-between',
         paddingHorizontal: 50,

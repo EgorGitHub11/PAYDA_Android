@@ -3,6 +3,9 @@ import { View, Text,  StyleSheet, TextInput, KeyboardAvoidingView, AsyncStorage,
 import io from 'socket.io-client/dist/socket.io'
 import {w,h} from '../../constants'
 import Header from '../uikit/Header'
+import {Button} from './ui'
+import Bbtn from '../uikit/mainBigBtn'
+import {mainUrlWs} from '../../config'
 
 //var ws = new WebSocket('ws://0.0.0.0:8000/ws/chat/');
 
@@ -48,7 +51,7 @@ export default class Chat extends Component {
 handleWebSockets = () => { 
   const pk = this.state.pk
   console.log('I am in handleWebSockets' + ' ' + pk)
-  const url = `ws://192.168.31.237:8001/ws/chat/${pk}/`
+  const url = mainUrlWs+`/ws/chat/${pk}/`
 
   ws = new WebSocket(url);
 
@@ -111,12 +114,12 @@ submitChatMessage() {
                       <Text style={notifyDateAndFromWho}>{msg.date}</Text>
                     </View>
                     <View style={notifyInside}>
-                    <Text style={notifyDateAndFromWho}>{name}</Text>
+                    <Text style={notifyDateAndFromWho}>Я</Text>
                     </View>
                 </View>
 
                 <View style={notifyInsideInfText}>
-                  <Text style={notifyText}>{msg.text}</Text>
+                  <Text style={notifyText}>{msg.message}</Text>
                 </View>
             </View>
             </View>
@@ -128,38 +131,33 @@ submitChatMessage() {
                       <Text style={notifyDateAndFromWho}>{msg.date}</Text>
                       </View>
                       <View style={notifyInside}>
-                      <Text style={notifyDateAndFromWho}>Я</Text>
+                      <Text style={notifyDateAndFromWho}>{name}</Text>
                       </View>
                       </View>
 
                       <View style={notifyInsideInfText}>
-                      <Text style={notifyText}>{msg.text}</Text>
+                      <Text style={notifyText}>{msg.message}</Text>
                       </View>
                       </View>
                 </View>
               
                 ))}
             </ScrollView>
-
-          <KeyboardAvoidingView behavior="padding">
+          </View>
               <View style={containerInputAndButton}>
                   <TextInput
                       style={input}
-                      placeholder='type..'
+                      placeholder='напишите..'
                       value={this.state.chatMessage}
                       onChangeText={chatMessage => {
                         this.setState({chatMessage})
                       }}
                   />
-                  <TouchableOpacity 
-                  onPress={() => this.submitChatMessage()}
-                  style={btn}>
+                  <Bbtn onPress={() => this.submitChatMessage()}
+                        style={btn}>
                     <Text>Send</Text>
-                  </TouchableOpacity>
+                  </Bbtn>
               </View>
-            </KeyboardAvoidingView>
-          </View>
-
       </View>
     );
   }
@@ -178,30 +176,25 @@ const styles = StyleSheet.create({
   },
   mainContainer:{
     flex:8,
-    backgroundColor: 'grey',
+    backgroundColor: '#fff',
     flexDirection:'column',
     justifyContent:'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   input:{
       width:w,
       height: 40,
-      margin: 20,
       direction: 'rtl',
       backgroundColor: '#fff',
-      borderBottomWidth: 1,
-      borderBottomColor: 'grey',
       color: '#000',
-      paddingHorizontal: 10,
   },
   btn:{
-    width:w,
     backgroundColor:'red'
   },
   containerInputAndButton:{
     width:w,
     flexDirection:'column',
-    justifyContent:'space-between',
+    justifyContent:'center',
     alignItems:'center'
   },
   notifyClient:{

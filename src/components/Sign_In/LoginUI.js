@@ -7,6 +7,7 @@ import {
 import LoginLogic from './LoginLogic'
 import {h,w} from '../../constants'
 
+
 export class LoginLetter extends React.Component {
   constructor(props) {
     super(props)
@@ -20,11 +21,8 @@ export class LoginLetter extends React.Component {
     const {container,formContainer,headerLogin, containerTitle, logo} = styles
     return (
       <View style={container}>
-
         <View style={headerLogin}>
-          <View style={containerTitle}>
             <Image style={logo} source={require('../../logo/logo.png')}/>
-          </View>
         </View>
 
         <View style={formContainer}>
@@ -42,30 +40,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     formContainer:{
-      flex: 4,
+      flex:1,
       justifyContent: 'center',
     },
     headerLogin:{
       width: w,
-      flex:2,
+      flex:1,
       justifyContent: 'center',
       alignItems: 'center',
-      borderBottomWidth: 1,
-      borderBottomColor: '#000'
+      backgroundColor:'#fff'
     },
     containerTitle:{
       justifyContent: 'center',
       alignItems: 'center'
     },
     title:{
-      fontSize:35,
+      fontSize:w/4,
       paddingBottom: h / 20
     },
     logo:{
-      width: w,
-      height: h / 7,
+      width:w/2,
+      height:h/2,
       resizeMode: 'contain',
-      margin: 'auto',
   },
 });
 

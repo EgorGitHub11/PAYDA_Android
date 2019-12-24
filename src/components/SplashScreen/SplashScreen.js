@@ -19,12 +19,10 @@ export default class SplashScreen extends Component {
   
 
   render() {
-      const {logo, mainC} = styles
+      const {logo, mainC, logoBlock} = styles
     return (
       <View style={mainC}>
-        <View>
             <Image style={logo} source={require('../../logo/logo.png')}/>
-        </View>
       </View>
     );
   }
@@ -32,8 +30,8 @@ export default class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
     logo:{
-        width: w,
-        height: h / 7,
+        width: '100%',
+        height: '100%',
         resizeMode: 'contain',
         margin: 'auto',
     },
@@ -42,5 +40,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent:'center',
         alignItems: 'center'
+    },
+    logoBlock:{
+      width:w,
+      height: h / 2
     }
 });

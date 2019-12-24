@@ -22,6 +22,13 @@ import AllEarn from '../Money/AllEarn'
 import AllSpend from '../Money/AllSpend'
 import Plategka from '../Pategka/Plategka'
 import CreatePlateg from '../Pategka/CreatePlateg'
+//documents
+      import Checks from '../Inbox/documents/checks'
+      import Contracts from '../Inbox/documents/contracts'
+      import Docs from '../Inbox/documents/docs'
+      import Form from '../Inbox/documents/form'
+      import Order from '../Inbox/documents/orders'
+//
 
 export default class index extends Component {
   render() {
@@ -50,7 +57,12 @@ const AppNavigator = createStackNavigator(
       AllEarn:{screen:AllEarn},
       AllSpend:{screen:AllSpend},
       Plategka:{screen:Plategka},
-      CreatePlateg:{screen:CreatePlateg}
+      CreatePlateg:{screen:CreatePlateg},
+      Checks:{screen:Checks},
+      Contracts:{screen:Contracts},
+      Docs:{screen:Docs},
+      Form:{screen:Form},
+      Order:{screen:Order}
     },
     {
       headerMode:'none',

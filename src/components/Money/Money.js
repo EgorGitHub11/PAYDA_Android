@@ -6,9 +6,10 @@ import Footer from '../uikit/footer'
 import {Button,ButtonLookAll} from './ui'
 import axios from 'axios'
 import DatePicker from 'react-native-datepicker'
+import {mainUrl} from '../../config'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const myIcon = <Icon name="tune" size={30} color="#F03C49" />;
+const myIcon = <Icon name="tune" size={30} color="#2980b9" />;
 
 export default class Money extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ export default class Money extends Component {
 
   getData(){
     const {jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/finance/`
+    const url = mainUrl+`/api/finance/`
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
@@ -69,7 +70,7 @@ export default class Money extends Component {
 
   getFilteredData = () => {
     const {jwt,date1,date2} = this.state
-    const url = `http://192.168.31.237:8000/api/finance?start=${date1}&stop=${date2}`
+    const url = mainUrl+`/api/finance?start=${date1}&stop=${date2}`
     console.log(url)
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
@@ -111,7 +112,7 @@ export default class Money extends Component {
         style={{width: 150}}
         date={date1}
         mode="date"
-        placeholder="select date"
+        placeholder="выберете дату"
         format="YYYY-MM-DD"
         minDate="2019-12-01"
         maxDate="2025-06-01"
@@ -140,7 +141,7 @@ export default class Money extends Component {
         style={{width: 150}}
         date={date2}
         mode="date"
-        placeholder="select date"
+        placeholder="выберете дату"
         format="YYYY-MM-DD"
         minDate="2019-12-01"
         maxDate="2025-06-01"

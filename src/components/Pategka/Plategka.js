@@ -8,7 +8,7 @@ import axios from 'axios'
 import DatePicker from 'react-native-datepicker'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const myIcon = <Icon name="tune" size={30} color="#F03C49" />;
+const myIcon = <Icon name="tune" size={30} color="#2980b9" />;
 
 export default class Plategka extends Component {
   constructor(props) {
@@ -356,14 +356,14 @@ const styles = StyleSheet.create({
     },
     bigTextSpend:{
         fontSize:20,
-        color:'red'
+        color:'#2980b9'
     },
     textEarn:{
         color:'green',
         fontSize:22
     },
     textSpend:{
-        color:'red',
+        color:'#2980b9',
         fontSize:22
     }
   });

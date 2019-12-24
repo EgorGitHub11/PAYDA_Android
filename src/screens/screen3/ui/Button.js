@@ -19,7 +19,7 @@ const styles = {
   button:{
     width:w / 2,
     marginTop: 10,
-    backgroundColor:'#F03C49',
+    backgroundColor:'#2980b9',
     paddingVertical: 15,
     marginBottom: 10,
     borderRadius: 30,

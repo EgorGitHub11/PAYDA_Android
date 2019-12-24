@@ -6,6 +6,7 @@ import Header from '../uikit/Header'
 import Footer from '../uikit/footer'
 import {Button} from './ui'
 import axios from 'axios'
+import {mainUrl} from '../../config'
 
 
 export default class AllEarn extends Component {
@@ -38,7 +39,7 @@ export default class AllEarn extends Component {
 
   getData(){
     const {jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/finance/`
+    const url = mainUrl+`/api/finance/`
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)

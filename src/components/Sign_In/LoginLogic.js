@@ -6,10 +6,15 @@ import {
 } from 'react-native';
 import { Input, TextLink, Loading, Button } from './ui';
 
+
+// import AsyncStorage from '@react-native-community/async-storage';
+
 import axios from 'axios'
-
-
+import {mainUrl} from '../../config'
+import Reinput from 'reinput'
 import {h,w} from '../../constants'
+import { SimpleAnimation } from 'react-native-simple-animations';
+
 
 
 export default class LoginLogic extends Component {
@@ -44,23 +49,18 @@ export default class LoginLogic extends Component {
  
   loginUser = () => {
       const { username, password } = this.state;
-  
+      const url = mainUrl+'/api/loginClient/'
+      console.log(url)
       this.setState({ error: '', loading: true });
   
-      axios.post("http://192.168.31.237:8000/api/loginClient/",{
+      axios.post(url,{
           username: username,
           password: password
       })
       .then((response) => {
-        // console.log(response.data)
-        // store.saveItem("id_token", response.data.access_token);
-        // console.log(store.readData("id_token"))
-        // this.props.navigation.navigate('Home')
-        // console.log(response.data.access_token)
-        // console.log(response.data.username)
-
         const data = response.data
         console.log(response.data)
+
         AsyncStorage.setItem('key',JSON.stringify(data), (err)=> {
           if(err){
               console.log("an error");
@@ -70,6 +70,7 @@ export default class LoginLogic extends Component {
       }).catch((err)=> {
           console.log("error is: " + err);
       })
+
       .then(() => {
         this.showData('key')
       })
@@ -82,9 +83,6 @@ export default class LoginLogic extends Component {
     }
 
    
-
-
- 
   onLoginFail() {
     this.setState({
       error: 'Login Failed',
@@ -99,34 +97,33 @@ export default class LoginLogic extends Component {
     const { form, section, errorTextStyle, containerTitle, title } = styles;
 
     return (
-      <Fragment>
-        <View style={containerTitle}>
-          <Text style={title}>
-            <Text style={{color:'red'}}>ПАЙДА</Text>
-            <Text style={{color:'grey'}}>БУХГАЛТЕРИЯ</Text>
-          </Text>
-        </View>
+      <ScrollView>
         <View style={form}>
-          <View style={section}>
-            <Input
-              placeholder='Введите номер'
-              value={username}
+        <SimpleAnimation delay={500} duration={1000} fade staticType='zoom'>
+          <View style={title}>
+            <Text style={{color:'blue', fontSize:18,}}>
+                ПАЙДА
+                <Text style={{color:'skyblue',}}>БУХГАЛТЕРИЯ</Text>
+            </Text>
+          </View>
+        </SimpleAnimation>
+            <Reinput
+              label='Логин' 
+              value = {username}
               onChangeText={username => this.setState({ username })}
             />
-          </View>
-
-          <View style={section}>
-            <Input
+   
+            <Reinput
               secureTextEntry
-              placeholder='Введите пароль'
+              label='Введите пароль'
               value={password}
               onChangeText={password => this.setState({ password })}
             />
-          </View>
+       
 
-          <Text style={errorTextStyle}>
-            {error}
-          </Text>
+            <Text style={errorTextStyle}>
+              {error}
+            </Text>
 
           {!loading ?
             <Button onPress={this.loginUser}>
@@ -137,37 +134,27 @@ export default class LoginLogic extends Component {
           }
 
         </View>
-      </Fragment>
+      </ScrollView>
     );
   }
 }
 
 const styles = {
   form: {
-    width: w,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  section: {
-    width:w,
-    height: 40,
-    marginVertical: 20,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'green',
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey',
-    color: '#000',
-    paddingHorizontal: 10,
+    backgroundColor:'#fff',
+    justifyContent: 'flex-start',
+    alignItems:'center',
+    flexDirection:'column',
+    padding: 20
   },
   containerTitle:{
     justifyContent: 'center',
     alignItems: 'center'
   },
   title:{
-    fontSize:35,
-    paddingBottom: h / 15
+    width:w,
+    justifyContent:'center',
+    alignItems: 'center',
   },
   errorTextStyle: {
     alignSelf: 'center',

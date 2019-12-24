@@ -17,7 +17,6 @@ const Button = ({ onPress, children }) => {
 
 const styles = {
   button:{
-    width:w / 2,
     marginTop: 10,
     backgroundColor:'#F03C49',
     paddingVertical: 15,

@@ -4,7 +4,7 @@ import {w,h} from '../../../constants'
 import {stylesItemInbox} from '../../../constants'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const myIcon = <Icon name="account-balance-wallet" size={35} color="#F03C49" />;
+const myIcon = <Icon name="account-balance-wallet" size={35} color="#2980b9" />;
 
 export default class Plateg extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class Plateg extends Component {
     return (
       <View style={stylesItemInbox.mainContainer}>
         {myIcon}
-        <Text style={stylesItemInbox.text}> Платежи </Text>
+        <Text style={stylesItemInbox.text}> Платежные поручения </Text>
       </View>
     );
   }

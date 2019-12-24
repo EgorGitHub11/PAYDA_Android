@@ -12,6 +12,7 @@ import Invoice from '../uikit/invoice'
 import IForPay from '../uikit/invoiceForPayment'
 import Footer from '../uikit/footer'
 import { array } from 'prop-types';
+import {mainUrl} from '../../config'
 
 
 
@@ -52,7 +53,7 @@ export default class HomeScreen extends Component {
 
   getData(){
     const {pk,jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/clientNotifications/${pk}/`
+    const url = mainUrl+`/api/clientNotifications/${pk}/`
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
@@ -98,6 +99,8 @@ export default class HomeScreen extends Component {
               <ScrollView>
               {
               arrNotify.reverse(),
+               
+              arrNotify.from_user == true ? 
               arrNotify.map(notify => (
               console.log(notify),
               <View style={notiffy}>
@@ -111,7 +114,10 @@ export default class HomeScreen extends Component {
               <Text style={notifyText}>{notify.message}</Text>
               </View>
           </View>
-            ))}
+            ))
+            :
+            <Text>Нет уведомлений</Text>
+            }
               </ScrollView>
             </View>
 
