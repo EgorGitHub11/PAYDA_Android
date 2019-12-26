@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, AsyncStorage,ScrollView} from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, AsyncStorage,ScrollView, Image} from 'react-native';
 import Header from '../uikit/Header'
 import {h,w} from '../../constants'
 
@@ -13,6 +13,7 @@ import IForPay from '../uikit/invoiceForPayment'
 import Footer from '../uikit/footer'
 import { array } from 'prop-types';
 import {mainUrl} from '../../config'
+import { SimpleAnimation } from 'react-native-simple-animations';
 
 
 
@@ -72,51 +73,61 @@ export default class HomeScreen extends Component {
     const { username, error, arrNotify, name} = this.state
     const {mainContainer, childMainContainer,bottomContainer, errorText, emailText,notiffy, 
       notifyInside, notifyInsideInfText, notifyInsideBlock,
-      notifyText,notifyDateAndFromWho, notifyBlockk} = styles
+      notifyText,notifyDateAndFromWho, notifyBlockk, logo} = styles
     return (
       <View style={mainContainer}>
-        <StatusBar backgroundColor="grey"/>
+        <StatusBar backgroundColor="#273c75"/>
         <Header navigation={this.props.navigation} name={'БУХГАЛТЕРИЯ'}/>
         <View style={childMainContainer}>
+          
+        <SimpleAnimation delay={500} duration={1000} fade staticType='zoom'>
             <TouchableOpacity  onPress={() => this.props.navigation.navigate('invoiceForPayment')}>
               <IForPay navigation={this.props.navigation}/>
             </TouchableOpacity>
+        </SimpleAnimation>
 
+        <SimpleAnimation delay={1100} duration={1000} fade staticType='zoom'>
             <TouchableOpacity onPress={ () => this.props.navigation.navigate('invoice') }> 
               <Invoice/>
             </TouchableOpacity>
+        </SimpleAnimation>
 
+        <SimpleAnimation delay={900} duration={1000} fade staticType='zoom'>
             <TouchableOpacity onPress={ () => this.props.navigation.navigate('certificateOfCompletion') }>
               <CofC/>
             </TouchableOpacity>
+        </SimpleAnimation>
 
+        <SimpleAnimation delay={700} duration={1000} fade staticType='zoom'>
             <TouchableOpacity onPress={ () => this.props.navigation.navigate('deliveryNote') }>
               <DeliveryNote/>
             </TouchableOpacity>
+        </SimpleAnimation>
         </View>
 
         <View style={notifyBlockk}>
               <ScrollView>
               {
-              arrNotify.reverse(),
-               
-              arrNotify.from_user == true ? 
+                 arrNotify.reverse(),
+                arrNotify.length != 0 ?
               arrNotify.map(notify => (
               console.log(notify),
               <View style={notiffy}>
+                   <View style={notifyInsideInfText}>
+              <Text style={notifyText}>{notify.message}</Text>
+              </View>
               <View style={notifyInsideBlock}>
                   <View style={notifyInside}>
                   <Text style={notifyDateAndFromWho}>{notify.created}</Text>
                   </View>
               </View>
-
-              <View style={notifyInsideInfText}>
-              <Text style={notifyText}>{notify.message}</Text>
-              </View>
           </View>
             ))
             :
-            <Text>Нет уведомлений</Text>
+            <View style={notifyBlockk}>
+              {/* <Image style={logo} source={require('../../logo/empty.png')}/> */}
+              <Text style={{fontSize:20, color:'grey'}}>Нет уведомлений</Text>
+            </View>
             }
               </ScrollView>
             </View>
@@ -159,13 +170,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#EEEFF3',
+    backgroundColor: '#fff',
+    paddingHorizontal:10
   },
   notifyBlockk:{
     height: h / 6,
     flexDirection: 'column-reverse',
     justifyContent:'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   notifyInside:{
     flexDirection: 'row',
@@ -193,5 +205,9 @@ const styles = StyleSheet.create({
   notifyDateAndFromWho:{
     fontSize:17,
     color:'grey'
+  },
+  logo:{
+    width:60,
+    height:60
   }
 });

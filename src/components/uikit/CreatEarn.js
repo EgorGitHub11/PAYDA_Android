@@ -67,7 +67,9 @@ export default class CreateEarn extends Component {
         this.setState({date: ""})
         this.setState({money: ""})
         this.setState({name: ""})
-        this.props.navigation.navigate('Money')
+    })
+    .then(() => {
+      this.props.navigation.navigate('Money')
     })
     .catch(function (error) {
       console.log(error);
@@ -82,7 +84,7 @@ export default class CreateEarn extends Component {
     const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-         <Header name={'СОЗДАТЬ ЧЕК'}/>
+         <Header navigation={this.props.navigation} name={'СОЗДАТЬ ЧЕК'}/>
             <View style={formBlock}>
                <View style={addBlock}>
                 <Text style={titleText}>Заполните поля</Text>
@@ -124,7 +126,7 @@ export default class CreateEarn extends Component {
               <View style={mainBtn}>
               {!loading ?
                 <Button onPress={() => this.postData()}>
-                  <Text style={{fontStyle: 'italic', fontSize:24}}>Отправить</Text>
+                  <Text style={{fontSize:24}}>Отправить</Text>
                 </Button>
                 :
                 <Loading size={'large'} />

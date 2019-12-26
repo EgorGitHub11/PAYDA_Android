@@ -110,13 +110,16 @@ export default class docs extends Component {
 
     const {notiffy, mainContainer, childMainContainer,
       notifyInside, notifyInsideInfText, notifyInsideBlock,
-      notifyText,notifyDateAndFromWho,scroll,notifyDateAndFromWhoBlue} = styles
+      notifyText,notifyDateAndFromWho,scroll,notifyDateAndFromWhoBlue,empty,textEmpty} = styles
     return (
       <View style={mainContainer}>
       <Header navigation={this.props.navigation} name={'ПЕРВИЧНЫЕ ДОКУМЕНТЫ'}/>
       <View style={childMainContainer}>
       <ScrollView style={scroll}>
           {
+                  arr.reverse(),
+                  arr.length != 0 
+                        ?
                   arr.map(i => (
                   <TouchableOpacity style={notiffy} onPress={() => this.download()}>
                           <View style={notifyInsideBlock}>
@@ -127,7 +130,12 @@ export default class docs extends Component {
                               </View>
                           </View>
                   </TouchableOpacity>
-                ))}
+                ))
+                        :
+                        <View style={empty}>
+                        <Text style={textEmpty}>Нет документов</Text>
+                      </View>
+              }
           </ScrollView>
       </View>
     </View>
@@ -251,6 +259,30 @@ const styles = StyleSheet.create({
   textSpend:{
       color:'red',
       fontSize:20
+  },
+  //Empty
+  empty:{
+    width:w,
+    height:h,
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  textEmpty:{
+    fontSize:24,
+    color:'grey'
+  },
+  //Empty
+  empty:{
+    width:w,
+    height:h,
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  textEmpty:{
+    fontSize:24,
+    color:'grey'
   }
 });
 

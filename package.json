@@ -21,6 +21,7 @@
     "react-native-calendar-picker": "^6.0.3",
     "react-native-calendars": "^1.217.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-elements": "^1.2.7",
     "react-native-events-calendar": "^1.0.8",
     "react-native-file-download": "0.0.10",
     "react-native-fs": "^2.16.2",

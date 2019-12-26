@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, AsyncStorage,} from 'react-native';
 
 import Header from '../../components/uikit/Header'
 
@@ -8,7 +8,7 @@ import BButton from '../../components/uikit/mainBigBtn'
 import axios from 'axios'
 import {Input,Button,Loading} from './ui'
 import Reinput from 'reinput'
-
+import {List,ListItem} from 'react-native-elements'
 
 
 export default class deliveryNote extends Component {
@@ -69,21 +69,22 @@ export default class deliveryNote extends Component {
     const url = `http://192.168.31.237:8000/api/sendNote/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
-
+    this.setState({ error: '', loading: true });
     axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
     axios.post(url, {
-          recipient: recipient,
           name: name,
           iin: iin,
-          resbonsible: resbonsible,
           addings: addings
       })
       .then(function (response) {
         console.log(response);
         if (response.status >= 200 && response.status < 300) {
         console.log('DONE!,DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!')
-        Toast.showSuccess('Post success')
    }
+      })
+      .then(() => {
+        this.props.navigation.navigate('Home')
+        this.setState({ error: '', loading: false });
       })
       .catch(function (error) {
         console.log(error);
@@ -100,7 +101,7 @@ export default class deliveryNote extends Component {
       const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-      <Header name={'НАКЛАДНАЯ НА ОТПУСК ТОВАРА'}/>
+      <Header navigation={this.props.navigation} name={'НАКЛАДНАЯ НА ОТПУСК ТОВАРА'}/>
      <ScrollView>
          <View style={formBlock}>
            <Reinput
@@ -112,28 +113,15 @@ export default class deliveryNote extends Component {
              value={iin}
              onChangeText = {iin => this.setState({iin})}
            />
-            <View style={addBlock}>
-             <Text style={titleText}>Заполните поля</Text>
-           </View>
-           <Reinput
-           label="Договор"
-           value={recipient}
-           onChangeText = {recipient => this.setState({recipient})}
-           />
-          <Reinput
-           label="ИИН(Заказчика)"
-           value={resbonsible}
-           onChangeText = {resbonsible => this.setState({resbonsible})}
-           />
           </View>
          <View style={addBlock}>
-                <Text style={titleText}>Добавление услуги</Text>
+                <Text style={titleText}>Добавление товара</Text>
             </View>
 
             <View style={formBlock}>
                <TodoList addings = {addings}/>
                   <Reinput
-                    label='Наименование услуги'
+                    label='Наименование товара'
                     value={services}
                     onChangeText = {services => this.setState({services})} 
                   />
@@ -164,7 +152,7 @@ export default class deliveryNote extends Component {
            <View style={mainBtn}>
            {!loading ?
              <BButton onPress={() => this.postData()}>
-               <Text style={{fontStyle: 'italic', fontSize:30}}>Отправить</Text>
+               <Text style={{fontSize:30}}>Отправить</Text>
              </BButton>
              :
              <Loading size={'large'} />
@@ -175,11 +163,13 @@ export default class deliveryNote extends Component {
     </View>                                                        
     );
   }
+
+
   handleSubmit(e) {
     if (!this.state.services.length || !this.state.unit.length || !this.state.count.length || !this.state.price.length) {
       return(console.log('error'))
     }
-      const { addings } = this.state
+      const { addings} = this. state
         addings.push({ 
             services: this.state.services,
             unit: this.state.unit,
@@ -195,17 +185,33 @@ export default class deliveryNote extends Component {
     console.log(this.state.addings)
   }
 }
+const list = [
+  {
+    name: 'Amy Farha',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: 'Vice President'
+  },
+  {
+    name: 'Chris Jackson',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    subtitle: 'Vice Chairman'
+  },
+]
 
 class TodoList extends React.Component {
+  
   render() {
-    const {itemsContainer,itemsText} = styles
+    const {itemsContainer,itemsText, itemsTextEnd} = styles
     return (
       <View style={itemsContainer}>
         {this.props.addings.map(item => (
           <Text style={itemsText} key={item.id}> 
           <Text>  - Наименование услуги: {item.services.toUpperCase()}</Text>
+ 
           <Text> - Единица измерения: {item.unit.toUpperCase()}</Text>
+ 
           <Text> - Количество: {item.count.toUpperCase()}</Text>
+
           <Text> - Цена за еденицу: {item.price.toUpperCase()}</Text>
           </Text>
         ))}
@@ -264,5 +270,12 @@ itemsText:{
   fontSize: 20,
   color: 'grey',
   padding:10
+},
+
+itemsTextEnd:{
+  fontSize: 20,
+  color: 'grey',
+  padding:10,
+  marginBottom:20
 }
 });

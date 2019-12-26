@@ -44,6 +44,10 @@ export default class Money extends Component {
     this.showData().then(() => this.getData())
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps()");
+}
+
   getData(){
     const {jwt} = this.state
     const url = mainUrl+`/api/finance/`

@@ -14,9 +14,9 @@ export default class certificateOfCompletion extends Component {
     super(props);
     this.state = {
         //Client
-        customer: '',
-        customer_iin: '',
-        contract: '',
+        ex_name:'',
+        ex_iin:'',
+        ex_adres:'',
         //Auto
         name: '',
         iin: '',
@@ -60,30 +60,32 @@ export default class certificateOfCompletion extends Component {
   }
 
   postData(){
-    const {customer,customer_iin,contract,
-           name,iin,
-           services,unit,count,price,addings,
+    const {ex_adres,ex_iin,ex_name,
+           name,iin,addings,
            pk,jwt} = this.state
 
     const url = `http://192.168.31.237:8000/api/sendCompletion/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
-
+    this.setState({ error: '', loading: true });
     axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
     axios.post(url, {
-          contract: contract,
           name: name,
           iin: iin,
-          customer_iin: customer_iin,
-          customer: customer,
-          addings: addings
+          addings: addings,
+          ex_adres:ex_adres,
+          ex_iin:ex_iin,
+          ex_name:ex_name
       })
       .then(function (response) {
         console.log(response);
         if (response.status >= 200 && response.status < 300) {
         console.log('DONE!,DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!')
-        Toast.showSuccess('Post success')
    }
+      })
+      .then(() => {
+        this.props.navigation.navigate('Home')
+        this.setState({ error: '', loading: false });
       })
       .catch(function (error) {
         console.log(error);
@@ -91,14 +93,13 @@ export default class certificateOfCompletion extends Component {
   }
 
   render() {
-    const {customer,customer_iin,contract,
-      name,iin,
+    const {name,iin,ex_adres,ex_iin,ex_name,
       services,unit,count,price,addings,
       pk,jwt,loading} = this.state
       const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-      <Header name={'АКТ ВЫПОЛНЕНЫХ РАБОТ'}/>
+      <Header navigation={this.props.navigation} name={'АКТ ВЫПОЛНЕНЫХ РАБОТ'}/>
      <ScrollView>
          <View style={formBlock}>
            <Reinput
@@ -114,19 +115,19 @@ export default class certificateOfCompletion extends Component {
              <Text style={titleText}>Заполните поля</Text>
            </View>
            <Reinput
-           label="Договор"
-           value={contract}
-           onChangeText = {contract => this.setState({contract})}
-           />
-          <Reinput
-           label="ИИН(Заказчика)"
-           value={customer_iin}
-           onChangeText = {customer_iin => this.setState({customer_iin})}
+           label="Исполнитель название"
+           value={ex_name}
+           onChangeText = {ex_name => this.setState({ex_name})}
            />
             <Reinput
-           label="Заказчик"
-           value={customer}
-           onChangeText = {customer => this.setState({customer})}
+           label="Исполнитель БИН/ИИН"
+           value={ex_iin}
+           onChangeText = {ex_iin => this.setState({ex_iin})}
+           />
+            <Reinput
+           label="Исполнитель адрес"
+           value={ex_adres}
+           onChangeText = {ex_adres => this.setState({ex_adres})}
            />
           </View>
          <View style={addBlock}>
@@ -167,7 +168,7 @@ export default class certificateOfCompletion extends Component {
            <View style={mainBtn}>
            {!loading ?
              <BButton onPress={() => this.postData()}>
-               <Text style={{fontStyle: 'italic', fontSize:30}}>Отправить</Text>
+               <Text style={{fontSize:30}}>Отправить</Text>
              </BButton>
              :
              <Loading size={'large'} />

@@ -14,12 +14,12 @@ export default class invoice extends Component {
     this.postData = this.postData.bind(this)
     this.state = {
       //Client
-      recipient: '',
-      iin_recipient: '',
-      iik_recipient: '',
-      bank_recipient: '',
-      bik_recipient: '',
-      contract :'',
+      rec_bin_iin: '',
+      rec_name:'',
+      rec_bik:'',
+      rec_iik:'',
+      rec_bank:'',
+      rec_adres:'',
       //Auto
       name: '',
       iin: '',
@@ -29,7 +29,6 @@ export default class invoice extends Component {
       bik: '',
       sender: '',
       buyer: '',
-      contract:'',
       pk:'',
       jwt: '',
       leader:'',
@@ -76,17 +75,16 @@ export default class invoice extends Component {
  
 
   postData(){
-    const {contract, name, iik, iin, kbe,
-      bank, bik, leader, recipient,iik_recipient,iin_recipient,
-      bank_recipient,bik_recipient, pk, jwt, addings} = this.state
+    const {name, iik, iin, kbe,
+      bank, bik, leader, pk, jwt, addings,  rec_bin_iin, rec_adres, 
+      rec_bank, rec_bik, rec_name, rec_iik} = this.state
 
     const url = `http://192.168.31.237:8000/api/sendInvoice/${pk}/`
     console.log('"""""""""""""""""""""')
     console.log(url)
-
+    this.setState({ error: '', loading: true });
     axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
     axios.post(url, {
-          contract: contract,
           name: name,
           iin: iin,
           iik: iik,
@@ -94,19 +92,22 @@ export default class invoice extends Component {
           bank: bank,
           bik: bik,
           leader: leader,
-          recipient: recipient,
-          iik_recipient: iik_recipient,
-          iin_recipient: iin_recipient,
-          bank_recipient: bank_recipient,
-          bik_recipient: bik_recipient,
+          rec_bin_iin: rec_bin_iin,
+          rec_bik: rec_bik,
+          rec_bank: rec_bank,
+          rec_name: rec_name,
+          rec_adres: rec_adres,
+          rec_iik: rec_iik,
           addings: addings
       })
       .then(function (response) {
         console.log(response);
         if (response.status >= 200 && response.status < 300) {
-        console.log('DONE!,DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!DONE!')
-        Toast.showSuccess('Post success')
    }
+      })
+      .then(() => {
+        this.props.navigation.navigate('Home')
+        this.setState({ error: '', loading: false });
       })
       .catch(function (error) {
         console.log(error);
@@ -115,16 +116,16 @@ export default class invoice extends Component {
 
 
   render() {
-    const {contract, name, iik, iin, kbe,
+    const { name, iik, iin, kbe,
            bank, bik, loading, 
-           leader, recipient,iik_recipient,
-           iin_recipient,bank_recipient,bik_recipient,addings,
-           services,unit,count,price} = this.state
+           leader,addings,
+           services,unit,count,price, rec_bin_iin, rec_adres, 
+           rec_bank, rec_bik, rec_name, rec_iik,} = this.state
 
     const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-      <Header name={'СЧЕТ НА ФАКТУРА'}/>
+      <Header navigation={this.props.navigation} name={'СЧЕТ НА ФАКТУРА'}/>
      <ScrollView>
          <View style={formBlock}>
            <Reinput
@@ -165,34 +166,34 @@ export default class invoice extends Component {
              <Text style={titleText}>Заполните поля</Text>
            </View>
            <Reinput
-           label="Договор"
-           value={contract}
-           onChangeText = {contract => this.setState({contract})}
+           label="Получатель БИН/ИИН"
+           value={rec_bin_iin}
+           onChangeText = {rec_bin_iin => this.setState({rec_bin_iin})}
+           />
+           <Reinput
+           label="Получатель название"
+           value={rec_name}
+           onChangeText = {rec_name => this.setState({rec_name})}
+           />
+           <Reinput
+           label="Получатель БИК"
+           value={rec_bik}
+           onChangeText = {rec_bik => this.setState({rec_bik})}
+           />
+           <Reinput
+           label="Получатель Банк"
+           value={rec_bank}
+           onChangeText = {rec_bank => this.setState({rec_bank})}
+           />
+           <Reinput
+           label="Получатель Адрес"
+           value={rec_adres}
+           onChangeText = {rec_adres => this.setState({rec_adres})}
            />
             <Reinput
-           label="Получатель"
-           value={recipient}
-           onChangeText = {recipient => this.setState({recipient})}
-           />
-            <Reinput
-           label="ИИК (Получателя)"
-           value={iik_recipient}
-           onChangeText = {iik_recipient => this.setState({iik_recipient})}
-           />
-            <Reinput
-           label="ИИН (Получателя)"
-           value={iin_recipient}
-           onChangeText = {iin_recipient => this.setState({iin_recipient})}
-           />
-            <Reinput
-           label="БИК (Получателя)"
-           value={bik_recipient}
-           onChangeText = {bik_recipient => this.setState({bik_recipient})}
-           />
-            <Reinput
-           label="Банк"
-           value={bank_recipient}
-           onChangeText = {bank_recipient => this.setState({bank_recipient})}
+           label="Получатель ИИК"
+           value={rec_iik}
+           onChangeText = {rec_iik => this.setState({rec_iik})}
            />
          </View>
      
@@ -233,7 +234,7 @@ export default class invoice extends Component {
            <View style={mainBtn}>
            {!loading ?
              <BButton onPress={() => this.postData()}>
-               <Text style={{fontStyle: 'italic', fontSize:30}}>Отправить</Text>
+               <Text style={{fontSize:30}}>Отправить</Text>
              </BButton>
              :
              <Loading size={'large'} />

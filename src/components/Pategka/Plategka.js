@@ -15,6 +15,7 @@ export default class Plategka extends Component {
     super(props);
     this.state = {
         jwt:'',
+        pk:'',
         arr: [],
         sum_spend:0,
         sum_earn:0,
@@ -32,7 +33,8 @@ export default class Plategka extends Component {
             const dataJson = JSON.parse(value)
             const {pk,name,access_token} = dataJson
             this.setState(prevState => ({
-              jwt: prevState.jwt + access_token
+              jwt: prevState.jwt + access_token,
+              pk: prevState.pk + pk
             }))
             return dataJson
         }
@@ -44,8 +46,8 @@ export default class Plategka extends Component {
   }
 
   getData(){
-    const {jwt} = this.state
-    const url = `http://192.168.31.237:8000/api/finance/`
+    const {jwt,pk} = this.state
+    const url = `http://192.168.31.237:8000/api/myPayments/${pk}/`
 
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
@@ -98,7 +100,7 @@ export default class Plategka extends Component {
            notifyInside, notifyInsideInfText, notifyInsideBlock,
            notifyText,notifyDateAndFromWho,firstTitle,
            thecondTitle, btnsblock, scroll, textEarn, textSpend, 
-           bigTextEarn, bigTextSpend,notifyDateAndFromWhoBlue} = styles
+           bigTextEarn, bigTextSpend,notifyDateAndFromWhoBlue,empty,textEmpty} = styles
 
     return (
         <View style={mainContainer}>
@@ -115,12 +117,12 @@ export default class Plategka extends Component {
             <ScrollView style={scroll}>
             {
                     arr.map(i => (
-                        !i.flag
+                        i.check_paid != true
                         ? 
                     <View style={notiffy}>
                             <View style={notifyInsideBlock}>
                                 <View style={notifyInside}>
-                                <Text style={notifyDateAndFromWho}>{i.money} тг</Text>
+                                <Text style={notifyDateAndFromWho}>{i.amount} тг</Text>
                                 <Text style={notifyDateAndFromWhoBlue}>{i.date}</Text>
                                 </View>
                             </View>
@@ -130,7 +132,9 @@ export default class Plategka extends Component {
                             </View>
                     </View>
                     :
-                    null
+                    <View style={empty}>
+                        <Text style={textEmpty}>Нет плетежей</Text>
+                    </View>
                   ))}
             </ScrollView>
           
@@ -365,5 +369,17 @@ const styles = StyleSheet.create({
     textSpend:{
         color:'#2980b9',
         fontSize:22
-    }
+    },
+     //Empty
+   empty:{
+    width:w,
+    height:h,
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  textEmpty:{
+    fontSize:24,
+    color:'grey'
+  }
   });

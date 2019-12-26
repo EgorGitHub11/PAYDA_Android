@@ -79,7 +79,7 @@ export default class CreatePlateg extends Component {
     const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-         <Header name={'СОЗДАТЬ ПЛАТЕЖ'}/>
+         <Header navigation={this.props.navigation} name={'СОЗДАТЬ ПЛАТЕЖ'}/>
             <View style={formBlock}>
                <View style={addBlock}>
                 <Text style={titleText}>Заполните поля</Text>
@@ -102,7 +102,7 @@ export default class CreatePlateg extends Component {
               <View style={mainBtn}>
               {!loading ?
                 <Button onPress={() => this.postData()}>
-                  <Text style={{fontStyle: 'italic', fontSize:24}}>Отправить</Text>
+                  <Text style={{fontSize:24}}>Отправить</Text>
                 </Button>
                 :
                 <Loading size={'large'} />

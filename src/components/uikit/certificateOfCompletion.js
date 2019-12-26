@@ -29,13 +29,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth:10,
-    borderColor: 'grey',
+    borderColor: '#273c75',
     borderTopStartRadius: 90,
     borderBottomEndRadius: 90
   },
   text:{
     textAlign:'center',
-    fontSize: 22,
-    color:'gray'
+    fontSize: 18,
+    color:'#2980b9',
+    fontWeight:'300'
   },
 });

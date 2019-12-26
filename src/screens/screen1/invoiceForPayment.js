@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, AsyncStorage, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, AsyncStorage, FlatList, ToastAndroid } from 'react-native';
 
 import Toast from 'react-native-tiny-toast'
 import Reinput from 'reinput'
@@ -16,7 +16,6 @@ export default class InvoiceForPayment extends Component {
     super(props);
     this.postData = this.postData.bind(this)
     this.state = {
-      loading: false,
       name: '',
       iin: '',
       iik: '',
@@ -24,8 +23,8 @@ export default class InvoiceForPayment extends Component {
       bank: '',
       bik: '',
       sender: '',
-      buyer: '',
-      contract:'',
+      buyer_bin_iin: '',
+      buyer_name:'',
       pk:'',
       jwt: '',
       loading: false,
@@ -72,15 +71,16 @@ export default class InvoiceForPayment extends Component {
   }
 
   postData(){
-    const {pk,jwt, buyer,contract, name, iin, iik, kbe, bank, bik, sender, addings} = this.state
+    const {pk,jwt, buyer_bin_iin,buyer_name,contract, name, iin, iik, kbe, bank, bik, sender, addings} = this.state
     const url = `http://192.168.31.237:8000/api/sendInvoicePayment/${pk}/`
     console.log('""""""""""""""""""""')
     console.log(url)
-  
+    this.setState({ error: '', loading: true });
+
     axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
     axios.post(url, {
-      buyer: buyer,
-      contract: contract,
+      buyer_bin_iin: buyer_bin_iin,
+      buyer_name: buyer_name,
       name: name,
       iin: iin,
       iik: iik,
@@ -94,11 +94,20 @@ export default class InvoiceForPayment extends Component {
       console.log(response);
       if (response.status >= 200 && response.status < 300) {
         console.log('ura!')
-        this.props.navigation.navigate('Home')
       }
+    })
+    .then(() => {
+      this.props.navigation.navigate('Home')
+      this.setState({ error: '', loading: false });
     })
     .catch(function (error) {
       console.log(error);
+      ToastAndroid.showWithGravity(
+        'Ошибка!!!',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
+      this.setState({ loading: '' });
     }); 
   }
 
@@ -106,13 +115,13 @@ export default class InvoiceForPayment extends Component {
 
   
   render() {
-    const {buyer, contract, name, iik, iin, kbe,
+    const {buyer_bin_iin, buyer_name, name, iik, iin, kbe,
        bank, bik, sender, loading, services, unit, count, price,
       addings, text} = this.state
     const {mainContainer, titleBlock, formBlock, titleText, addBlock, mainBtn} = styles
     return (
       <View style={mainContainer}>
-         <Header name={'СЧЕТ НА ОПЛАТУ'}/>
+         <Header navigation={this.props.navigation} name={'СЧЕТ НА ОПЛАТУ'}/>
         <ScrollView>
             <View style={formBlock}>
               <Reinput
@@ -153,14 +162,14 @@ export default class InvoiceForPayment extends Component {
                 <Text style={titleText}>Заполните поля</Text>
               </View>
               <Reinput
-              label="Покупатель"
-              value={buyer}
-              onChangeText={buyer => this.setState({ buyer })}
+              label="Покупатель БИН/ИИН"
+              value={buyer_bin_iin}
+              onChangeText={buyer_bin_iin => this.setState({ buyer_bin_iin })}
               />
               <Reinput
-              label="Договор"
-              value={contract}
-              onChangeText = {contract => this.setState({contract})}
+              label="Покупатель название"
+              value={buyer_name}
+              onChangeText = {buyer_name => this.setState({buyer_name})}
               />
             </View>
 
@@ -201,7 +210,7 @@ export default class InvoiceForPayment extends Component {
               <View style={mainBtn}>
               {!loading ?
                 <BButton onPress={() => this.postData()}>
-                  <Text style={{fontStyle: 'italic', fontSize:30}}>Отправить</Text>
+                  <Text style={{fontSize:30}}>Отправить</Text>
                 </BButton>
                 :
                 <Loading size={'large'} />

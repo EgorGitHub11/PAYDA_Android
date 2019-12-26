@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text,  StyleSheet, TextInput, KeyboardAvoidingView, AsyncStorage, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text,  StyleSheet, TextInput, KeyboardAvoidingView, AsyncStorage, 
+  TouchableOpacity, ScrollView, Keyboard} from 'react-native';
 import io from 'socket.io-client/dist/socket.io'
 import {w,h} from '../../constants'
 import Header from '../uikit/Header'
 import {Button} from './ui'
 import Bbtn from '../uikit/mainBigBtn'
 import {mainUrlWs} from '../../config'
+
 
 //var ws = new WebSocket('ws://0.0.0.0:8000/ws/chat/');
 
@@ -45,7 +47,6 @@ export default class Chat extends Component {
       }
       this.showData().then(() => this.handleWebSockets())
 }
-
 
 
 handleWebSockets = () => { 
@@ -99,10 +100,13 @@ submitChatMessage() {
   
       <View  style={mainContainer}>
 
-        <Header name="СООБЩЕНИЯ"/>
+        <Header navigation={this.props.navigation} name="СООБЩЕНИЯ"/>
           <View style={container}>
 
-            <ScrollView>
+            <ScrollView ref={ref => this.scrollView = ref}
+    onContentSizeChange={(contentWidth, contentHeight)=>{        
+        this.scrollView.scrollToEnd({animated: true});
+    }}>
                 {chatMessages.map(msg => (
                 console.log(msg),
                 msg.from_client === true 
@@ -147,7 +151,7 @@ submitChatMessage() {
               <View style={containerInputAndButton}>
                   <TextInput
                       style={input}
-                      placeholder='напишите..'
+                      placeholder=' напишите..'
                       value={this.state.chatMessage}
                       onChangeText={chatMessage => {
                         this.setState({chatMessage})
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   notifyClient:{
-    width: w /2 ,
+    width: 300,
     height: 'auto',
     backgroundColor: '#EEEFF3',
     margin: 10,
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
     padding:10
   },
   notifyAdmin:{
-    width: w / 2,
+    width: 300,
     height: 'auto',
     backgroundColor: 'lightgreen',
     margin: 10,

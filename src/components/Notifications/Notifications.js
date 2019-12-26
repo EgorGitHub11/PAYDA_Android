@@ -85,6 +85,7 @@ export default class Inbox extends Component {
       axios.defaults.headers.common['Authorization'] = 'Token ' + jwt;
       axios.get(url)
       .then((response) => {
+        console.log(response.data + ' ' + 'NOTTTTT')
         this.setState({arrAgent: response.data})
         console.log(this.state.arrAgent + ' ' + 'cool')
       })
@@ -100,7 +101,7 @@ export default class Inbox extends Component {
 
     const {childMainContainer, mainContainer, notiffy, 
            notifyInside, notifyInsideInfText, notifyInsideBlock,
-           notifyText,notifyDateAndFromWho} = styles
+           notifyText,notifyDateAndFromWho,empty,textEmpty} = styles
     return (
       <View style={mainContainer}>
          <Header navigation={this.props.navigation} name={'УВЕДОМЛЕНИЯ'}/>
@@ -108,17 +109,16 @@ export default class Inbox extends Component {
           <ScrollView>
           {
             arrAgent.reverse(),
-            arrAgent.from_user == true 
+            arrAgent.length != 0
             ?
             arrAgent.map(notify => (
-              console.log(notify),
               <View style={notiffy}>
               <View style={notifyInsideBlock}>
                   <View style={notifyInside}>
                   <Text style={notifyDateAndFromWho}>{notify.created}</Text>
                   </View>
                   <View style={notifyInside}>
-                  <Text style={notifyDateAndFromWho}>{name}</Text>
+                  <Text style={notifyDateAndFromWho}>{notify.agent}</Text>
                   </View>
               </View>
 
@@ -126,10 +126,12 @@ export default class Inbox extends Component {
               <Text style={notifyText}>{notify.message}</Text>
               </View>
           </View>
-
             ))
           :
-          <Text>Нет уведомлений</Text>
+          <View style={empty}>
+              <Text style={textEmpty}>Нет уведомлений</Text>
+          </View>
+         
           }
           </ScrollView>
         </View>
@@ -190,6 +192,18 @@ const styles = StyleSheet.create({
   },
   notifyDateAndFromWho:{
     fontSize:17,
+    color:'grey'
+  },
+   //Empty
+   empty:{
+    width:w,
+    height:h,
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  textEmpty:{
+    fontSize:24,
     color:'grey'
   }
 });

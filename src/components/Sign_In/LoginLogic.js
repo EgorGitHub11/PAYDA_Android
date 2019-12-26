@@ -4,8 +4,7 @@ import {
     TouchableOpacity, ScrollView, 
     KeyboardAvoidingView, View, AsyncStorage
 } from 'react-native';
-import { Input, TextLink, Loading, Button } from './ui';
-
+import {  TextLink, Loading, Button } from './ui';
 
 // import AsyncStorage from '@react-native-community/async-storage';
 
@@ -107,12 +106,13 @@ export default class LoginLogic extends Component {
             </Text>
           </View>
         </SimpleAnimation>
+        
             <Reinput
               label='Логин' 
               value = {username}
               onChangeText={username => this.setState({ username })}
             />
-   
+
             <Reinput
               secureTextEntry
               label='Введите пароль'
